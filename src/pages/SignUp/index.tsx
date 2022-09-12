@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-
+import { backUrl } from '../../variable/url';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
@@ -27,11 +28,17 @@ const SignUp = () => {
     if (passwordCheck !== password)setMismatchError(true);
     else {
       setMismatchError(false);
-      // axios.post('{backUrl}/registrantion/', {
-      //
-      // });
+      try {
+        void axios.post(`${backUrl}/registration/`, {
+          Username: { Username },
+          Email: { email },
+          Password1: { password },
+          Password2: { passwordCheck }
+
+        });
+        console.log(email, Username, password, passwordCheck);
+      } catch (err) { console.log(err); }
     }
-    console.log(email, Username, password, passwordCheck);
   }, [email, Username, password, passwordCheck]);
 
   return (

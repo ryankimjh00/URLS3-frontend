@@ -1,3 +1,3 @@
-const backUrl = 'http://127.0.0.1:8000/';
+const backUrl = 'http://127.0.0.1:8000';
 
 export { backUrl };
