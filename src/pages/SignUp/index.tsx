@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { backUrl } from '../../variable/url';
+import axios from 'axios';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +25,12 @@ const SignUp = () => {
   const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordCheck !== password)setMismatchError(true);
-    else setMismatchError(false);
+    else {
+      setMismatchError(false);
+      // axios.post('{backUrl}/registrantion/', {
+      //
+      // });
+    }
     console.log(email, Username, password, passwordCheck);
   }, [email, Username, password, passwordCheck]);
 
