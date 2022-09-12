@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { backUrl } from '../../variable/url';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { setCookie } from '../../variable/token';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchErrorText] = useState('비밀번호가 일치하지 않습니다.');
+
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   }, []);
@@ -23,23 +25,27 @@ const SignUp = () => {
   const onChangePasswordCheck = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordCheck(e.target.value);
   }, []);
-  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (passwordCheck !== password)setMismatchError(true);
-    else {
-      setMismatchError(false);
-      try {
-        void axios.post(`${backUrl}/registration/`, {
-          Username: { Username },
-          Email: { email },
-          Password1: { password },
-          Password2: { passwordCheck }
 
-        });
-        console.log(email, Username, password, passwordCheck);
-      } catch (err) { console.log(err); }
+  const registration = async () => {
+    await axios.post(`${backUrl}/registration/`, {
+      username: Username,
+      email,
+      password1: password,
+      password2: passwordCheck
+
+    })
+      .then((res) => {
+        setCookie('token', res.data);
+      });
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (passwordCheck !== password) { setMismatchError(true); } else {
+      setMismatchError(false);
+      registration().then(res => { console.log(res); }).catch(err => { console.log(err); });
     }
-  }, [email, Username, password, passwordCheck]);
+  };
 
   return (
             <Container>
