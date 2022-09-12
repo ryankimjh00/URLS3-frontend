@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { backUrl } from '../../variable/url';
-import axios from 'axios';
+
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -74,6 +74,7 @@ const SignUp = () => {
                         <button id="signUpButton" type="submit">가입하기</button>
 
                     </form>
+                    <Link to="/login">로그인 하러 가기</Link>
                 </div>
 
                 </body>
