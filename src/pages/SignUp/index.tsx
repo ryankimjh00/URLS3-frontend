@@ -35,7 +35,7 @@ const SignUp = () => {
 
     })
       .then((res) => {
-        setCookie('token', res.data);
+        setCookie('SignUpToken', res.data);
       });
   };
 
