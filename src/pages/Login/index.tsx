@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
-import { getCookie } from '../../variable/token';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -22,11 +21,6 @@ const LogIn = () => {
       username: Username,
       email,
       password
-
-    }, {
-      headers: {
-        key: getCookie('token')
-      }
 
     })
       .then((res) => {

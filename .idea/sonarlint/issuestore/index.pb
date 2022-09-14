@@ -10,3 +10,9 @@ F
 src/reportWebVitals.ts,d\9\d938938695d447dadda115e28781c6541f53fc4f
 A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
+>
+.eslintrc.json,7\1\71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
+=
+tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
+=
+src/index.css,c\5\c5d38a62d1faae90a2acaa34b79a7ef365c917e4
