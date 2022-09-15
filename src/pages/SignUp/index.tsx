@@ -12,7 +12,7 @@ const SignUp = () => {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchErrorText] = useState('비밀번호가 일치하지 않습니다.');
-
+  const [SignUpErr, setSignUpErr] = useState('');
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   }, []);
@@ -36,7 +36,8 @@ const SignUp = () => {
     })
       .then((res) => {
         setCookie('SignUpToken', res.data);
-      });
+      })
+      .catch(() => { setSignUpErr('이미 있는 이름이거나 비밀번호가 너무 단순합니다'); });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,6 +80,7 @@ const SignUp = () => {
 
                         <div className="line">
                             <hr/>
+                            <h5>{SignUpErr}</h5>
                         </div>
                         {mismatchError &&
                             <h1>{mismatchErrorText}</h1>
