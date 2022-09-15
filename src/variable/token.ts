@@ -12,6 +12,6 @@ const rmLogInToken = () => {
   cookies.remove('LoginToken');
 };
 
-export const LogInToken = getCookie('LoginToken');
+export const LoginToken = getCookie('LoginToken');
 
 export { setCookie, getCookie, rmLogInToken };

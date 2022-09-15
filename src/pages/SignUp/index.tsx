@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { backUrl } from '../../variable/url';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { setCookie } from '../../variable/token';
+import { LoginToken, setCookie } from '../../variable/token';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -47,7 +47,9 @@ const SignUp = () => {
       registration().then(res => { console.log(res); }).catch(err => { console.log(err); });
     }
   };
-
+  useEffect(() => {
+    if (LoginToken !== null)location.replace('/main');
+  }, []);
   return (
             <Container>
                 <head>
@@ -89,7 +91,7 @@ const SignUp = () => {
                         <button id="signUpButton" type="submit">가입하기</button>
 
                     </form>
-                    <Link to="/login">로그인 하러 가기</Link>
+                        <Link to="/login">로그인 하러 가기</Link>
                 </div>
 
                 </body>
