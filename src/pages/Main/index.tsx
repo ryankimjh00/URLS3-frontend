@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
 import { rmLogInToken } from '../../variable/token';
+import styled from 'styled-components';
 
 const Main = () => {
   const formData = new FormData();
@@ -29,13 +30,13 @@ const Main = () => {
     console.log(formData);
   };
   return (
-        <>
-            <div>
+        <MainContainer>
+            <MainHeader>
                 <input type='button'
                        value ='로그아웃'
                        onClick={() => { void LogOut(); }}>
                 </input>
-            </div>
+            </MainHeader>
           <div>
             <input type='file'
                    accept='image/jpg,impge/png,image/jpeg,image/gif'
@@ -47,8 +48,17 @@ const Main = () => {
             <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
           </div>
 
-        </>
+        </MainContainer>
   );
 };
-
+const MainContainer = styled.div`
+`;
+const MainHeader = styled.div`
+  background-color: antiquewhite;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 export default Main;
