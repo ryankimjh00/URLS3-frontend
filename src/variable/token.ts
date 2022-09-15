@@ -9,9 +9,9 @@ const getCookie = (name: string) => {
 };
 
 const rmLogInToken = () => {
-  cookies.remove('LogInToken');
+  cookies.remove('LoginToken');
 };
 
-export const LogInToken = getCookie('LogInToken');
+export const LogInToken = getCookie('LoginToken');
 
 export { setCookie, getCookie, rmLogInToken };
