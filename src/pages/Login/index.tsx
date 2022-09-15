@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
-import { getCookie, setCookie } from '../../variable/token';
+import { setCookie } from '../../variable/token';
 
 const LogIn = () => {
   const [Username, setUsername] = useState('');
