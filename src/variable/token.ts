@@ -8,4 +8,6 @@ const getCookie = (name: string) => {
   return cookies.get(name);
 };
 
+export const LogInToken = getCookie('LogInToken');
+
 export { setCookie, getCookie };
