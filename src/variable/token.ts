@@ -8,10 +8,10 @@ const getCookie = (name: string) => {
   return cookies.get(name);
 };
 
-const rmLogInToken = () => {
+const rmToken = () => {
   cookies.remove('LoginToken');
 };
 
 export const LoginToken = getCookie('LoginToken');
 
-export { setCookie, getCookie, rmLogInToken };
+export { setCookie, getCookie, rmToken };

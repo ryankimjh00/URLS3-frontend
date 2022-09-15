@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
-import { rmLogInToken } from '../../variable/token';
+import { rmToken } from '../../variable/token';
 import styled from 'styled-components';
 
 const Main = () => {
@@ -9,7 +9,7 @@ const Main = () => {
   const LogOut = async () => {
     await axios.post(`${backUrl}/logout/`)
       .then(() => {
-        rmLogInToken();
+        rmToken();
         location.replace('/login');
       }).catch((err) => { console.log(err); });
   };

@@ -16,5 +16,3 @@ A
 tsconfig.json,6\1\61ebb9fd6e8cf9082658121d5d81e297791dacd0
 =
 src/index.css,c\5\c5d38a62d1faae90a2acaa34b79a7ef365c917e4
-=
-src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
 import { setCookie } from '../../variable/token';
+import { Link } from 'react-router-dom';
 
 const LogIn = () => {
   const [Username, setUsername] = useState('');
@@ -60,6 +61,7 @@ const LogIn = () => {
           </form>
 
         </div>
+        <Link to='/'>회원가입 하러가기</Link>
 
         </body>
       </Container>
