@@ -1,6 +1,13 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { LogOut } from '../features/Logout';
+import { LoginToken } from '../variable/token';
 export const NavComponent = () => {
+  const [loginStatus, setloginStatus] = useState(false);
+  useEffect(() => {
+    if (LoginToken !== undefined) setloginStatus(true);
+  }, [LoginToken]);
+
   return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -24,9 +31,12 @@ export const NavComponent = () => {
                     </Nav>
                     <Nav>
                         <Nav.Link href="#deets">More deets</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
-                        </Nav.Link>
+                        {loginStatus &&
+                            <Nav.Link eventKey={2} href="/login" onClick={LogOut}>
+                                로그 아웃
+                            </Nav.Link>
+                        }
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>
