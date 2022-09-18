@@ -19,7 +19,7 @@ const LogIn = () => {
       username: Username,
       password
 
-    })
+    }, { withCredentials: true })
       .then((res) => {
         setCookie('LoginToken', res.data);
         location.replace('/main');

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
-import { rmToken } from '../../variable/token';
+import { rmToken, LoginToken } from '../../variable/token';
 import styled from 'styled-components';
 
 const Main = () => {
@@ -18,6 +18,8 @@ const Main = () => {
       image: formData
     }, {
       headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Token ${LoginToken}`,
         'Content-Type': 'multipart/form-data'
       }
     }).catch((err) => { console.log(err); });
@@ -30,6 +32,7 @@ const Main = () => {
     console.log(formData);
   };
   return (
+
         <MainContainer>
             <MainHeader>
                 <input type='button'
