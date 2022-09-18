@@ -10,9 +10,9 @@ const App: React.FC = () => {
       <BrowserRouter>
           <NavComponent/>
           <Routes>
-              <Route path="/" element={<SignUp/>}/>
+              <Route path="/signup" element={<SignUp/>}/>
               <Route path="/login" element={<LogIn/>}/>
-              <Route path="/main" element={<Main />}/>
+              <Route path="/" element={<Main />}/>
           </Routes>
       </BrowserRouter>
 

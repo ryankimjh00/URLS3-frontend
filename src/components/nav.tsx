@@ -1,9 +1,16 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { LogOut } from '../features/Logout';
 import { LoginToken } from '../variable/token';
+import ProfileComponent from './ProfileComponent';
+
 export const NavComponent = () => {
   const [loginStatus, setloginStatus] = useState(false);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const onClickToggleModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+  }, [isOpenModal]);
+
   useEffect(() => {
     if (LoginToken !== undefined) setloginStatus(true);
   }, [LoginToken]);
@@ -30,15 +37,28 @@ export const NavComponent = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
+                        <Nav.Link href="#deets">more</Nav.Link>
                         {loginStatus &&
-                            <Nav.Link eventKey={2} href="/login" onClick={LogOut}>
+                            <Nav.Link onClick={onClickToggleModal}>
+                                프로필
+                            </Nav.Link>
+                        }
+                        {loginStatus &&
+                            <Nav.Link href="/login" onClick={LogOut}>
                                 로그 아웃
+                            </Nav.Link>
+                        }
+                        {!loginStatus &&
+                            <Nav.Link href="/signup">
+                                회원 가입
                             </Nav.Link>
                         }
 
                     </Nav>
                 </Navbar.Collapse>
+                {isOpenModal && (
+                    <ProfileComponent onClickToggleModal={onClickToggleModal} />
+                )}
             </Container>
         </Navbar>
 
