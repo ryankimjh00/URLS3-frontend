@@ -18,8 +18,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const [lastname, setLastname] = useState('1');
 
   const getMyUser = async () => {
-    await axios.post(`${backUrl}/token/user`, {
-    }, {
+    await axios.get(`${backUrl}/token/user/`, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         Authorization: `Bearer ${AccessToken}`
