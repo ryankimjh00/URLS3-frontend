@@ -9,10 +9,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-      {/* eslint-disable-next-line react/jsx-no-undef */}
+
     <App />
-  </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

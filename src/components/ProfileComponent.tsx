@@ -16,6 +16,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
 
   const UpdateProfile = async () => {
     await axios.post(`${backUrl}/profile/`, {}, {
@@ -23,7 +24,20 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         Authorization: `Bearer ${AccessToken}`
       }
-    });
+    })
+      .then(r => setThumbnail(r.data.image));
+  };
+  const GetImg = async () => {
+    if (pk !== '') {
+      await axios.get(`${backUrl}/profile/${pk}/`, {
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          Authorization: `Bearer ${AccessToken}`
+        }
+      })
+        .then(r => { setThumbnail(r.data.thumbnail); })
+        .catch(err => console.log(err));
+    }
   };
 
   const getMyUser = async () => {
@@ -44,8 +58,9 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   };
   useEffect(() => {
     void getMyUser();
+    void GetImg();
     console.log('Teset');
-  }, []);
+  }, [thumbnail]);
   const closeModal = () => {
     onClickToggleModal(false);
   };
@@ -78,6 +93,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
                       </div>
                   </ImageContainer>
+                  <img src={thumbnail}/>
                   <input type='button' value ='확인' onClick={() => { void UpdateProfile(); }} />
               </BodyContainer>
 
