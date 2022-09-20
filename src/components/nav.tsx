@@ -7,6 +7,7 @@ import ProfileComponent from './ProfileComponent';
 export const NavComponent = () => {
   const [loginStatus, setloginStatus] = useState(false);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
+
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
   }, [isOpenModal]);

@@ -1,13 +1,43 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ImgUpload, onChange } from '../features/ImgUpload';
+import axios from 'axios';
+import { backUrl } from '../variable/url';
+import { AccessToken } from '../variable/token';
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
 }
 
 const ProfileComponent = ({ onClickToggleModal }: Props) => {
+  const [pk, setPk] = useState('1');
+  const [username, setUsername] = useState('1');
+  const [email, setEmail] = useState('1');
+  const [firstname, setFirstname] = useState('1');
+  const [lastname, setLastname] = useState('1');
+
+  const getMyUser = async () => {
+    await axios.post(`${backUrl}/token/user`, {
+    }, {
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`
+      }
+    })
+      .then(r => {
+        setPk(r.data.pk);
+        setUsername(r.data.username);
+        setEmail(r.data.email);
+        setFirstname(r.data.first_name);
+        setLastname(r.data.last_name);
+      })
+      .catch((err) => { console.log(err); });
+  };
+  useEffect(() => {
+    void getMyUser();
+    console.log('Teset');
+  }, []);
   const closeModal = () => {
     onClickToggleModal(false);
   };
@@ -22,7 +52,12 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                       X
                   </Close>
               </Header>
-              <UpdateContainer>
+              <BodyContainer>
+                  <h3>pk: {pk}</h3>
+                  <h3>username: {username}</h3>
+                  <h3>email: {email}</h3>
+                  <h3>first_name: {firstname}</h3>
+                  <h3>last_name: {lastname}</h3>
                   <ImageContainer>
                       <div>
                           <input type='file'
@@ -35,7 +70,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
                       </div>
                   </ImageContainer>
-              </UpdateContainer>
+              </BodyContainer>
 
           </DialogBox>
       </ModalContainer>
@@ -47,19 +82,17 @@ const ModalContainer = styled.div`
   width: 50%;
   height: 50%;
   display: flex;
-  background-color: brown;
   align-items: center;
   position: fixed;
 `;
 const Header = styled.div`
-    display: flex;
     justify-content: space-between;
 `;
 const ImageContainer = styled.div`
   display: flex;
   justify-content: space-between;`;
-const UpdateContainer = styled.div`
-  display: flex;
+const BodyContainer = styled.div`
+  
   justify-content: space-between;
 `;
 const Close = styled.button`
