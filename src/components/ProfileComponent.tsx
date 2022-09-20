@@ -11,11 +11,20 @@ interface Props{
 }
 
 const ProfileComponent = ({ onClickToggleModal }: Props) => {
-  const [pk, setPk] = useState('1');
-  const [username, setUsername] = useState('1');
-  const [email, setEmail] = useState('1');
-  const [firstname, setFirstname] = useState('1');
-  const [lastname, setLastname] = useState('1');
+  const [pk, setPk] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+
+  const UpdateProfile = async () => {
+    await axios.post(`${backUrl}/profile/`, {}, {
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`
+      }
+    });
+  };
 
   const getMyUser = async () => {
     await axios.get(`${backUrl}/token/user/`, {
@@ -69,6 +78,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
                       </div>
                   </ImageContainer>
+                  <input type='button' value ='확인' onClick={() => { void UpdateProfile(); }} />
               </BodyContainer>
 
           </DialogBox>
