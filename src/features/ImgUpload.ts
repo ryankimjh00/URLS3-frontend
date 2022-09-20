@@ -5,7 +5,7 @@ import { AccessToken } from '../variable/token';
 export const formData = new FormData();
 export const ImgUpload = async () => {
   await axios.post(`${backUrl}/profile/image/`, {
-    image: formData
+    image: formData.get('file')
   }, {
     headers: {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

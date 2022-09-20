@@ -35,7 +35,7 @@ const SignUp = () => {
 
     })
       .then((res) => {
-        location.replace('/');
+        location.replace('/login');
       })
       .catch(() => { setSignUpErr('이미 있는 이름이거나 비밀번호가 너무 단순합니다'); });
   };
