@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import React, { useCallback, useEffect, useState } from 'react';
 import { LogOut } from '../features/Logout';
-import { LoginToken } from '../variable/token';
+import { AccessToken } from '../variable/token';
 import ProfileComponent from './ProfileComponent';
 
 export const NavComponent = () => {
@@ -12,8 +12,8 @@ export const NavComponent = () => {
   }, [isOpenModal]);
 
   useEffect(() => {
-    if (LoginToken !== undefined) setloginStatus(true);
-  }, [LoginToken]);
+    if (AccessToken !== undefined) setloginStatus(true);
+  }, [AccessToken]);
 
   return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

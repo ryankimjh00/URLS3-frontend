@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { backUrl } from '../../variable/url';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { LoginToken, setCookie } from '../../variable/token';
+import { AccessToken } from '../../variable/token';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +35,6 @@ const SignUp = () => {
 
     })
       .then((res) => {
-        setCookie('LoginToken', res.data);
         location.replace('/');
       })
       .catch(() => { setSignUpErr('이미 있는 이름이거나 비밀번호가 너무 단순합니다'); });
@@ -49,8 +48,8 @@ const SignUp = () => {
     }
   };
   useEffect(() => {
-    if (LoginToken !== undefined)location.replace('/');
-    console.log(LoginToken);
+    if (AccessToken !== undefined)location.replace('/');
+    console.log(AccessToken);
   }, []);
   return (
             <Container>

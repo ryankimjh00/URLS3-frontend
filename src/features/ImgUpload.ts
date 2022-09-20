@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { backUrl } from '../variable/url';
-import { LoginToken } from '../variable/token';
+import { AccessToken } from '../variable/token';
 
 export const formData = new FormData();
 export const ImgUpload = async () => {
@@ -9,7 +9,7 @@ export const ImgUpload = async () => {
   }, {
     headers: {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      Authorization: `Token ${LoginToken}`,
+      Authorization: `Bearer ${AccessToken}`,
       'Content-Type': 'multipart/form-data'
     }
   }).catch((err) => { console.log(err); });
