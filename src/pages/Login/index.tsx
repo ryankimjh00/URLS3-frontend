@@ -15,11 +15,11 @@ const LogIn = () => {
     setUsername(e.target.value);
   }, []);
   const login = async () => {
-    await axios.post(`${backUrl}/login/`, {
+    await axios.post(`${backUrl}/token/login/`, {
       username: Username,
       password
 
-    }, { withCredentials: true })
+    })
       .then((res) => {
         setCookie('LoginToken', res.data);
         location.replace('/');
