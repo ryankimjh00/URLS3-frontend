@@ -20,10 +20,21 @@ const MainContainer = styled.div`
 `;
 const Input = styled.input`
   display: inline-block;
+  font-weight: 400;
   width: 50%;
-  overflow: inherit;
+  font-size: 20px;
+  background-color: #1d1d1f;
+  border-radius: 8px;
+  border: 0;
+  color: white;
+  outline: none;
 `;
 const Button = styled.button`
-  border-radius: 5px;
+  display: inline-block;
+  box-sizing: content-box;
+  font-size: 20px;
+  background-color: black;
+  color: #2997ff;
+  border: 0;
 `;
 export default Main;
