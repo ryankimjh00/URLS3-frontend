@@ -6,11 +6,11 @@ import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
 import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
-import { storeImage } from '../redux/slices/ImageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-const thumbnail = useSelector((state: RootState) => state.Thumbnail.url);
-const image = useSelector((state: RootState) => state.Image.id);
+import { GetImg } from '../features/GetImg';
+import { UpdateProfile } from '../features/UpdateProfile';
+
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
@@ -22,17 +22,9 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const thumbnail = useSelector((state: RootState) => state.Thumbnail.url);
+  const image = useSelector((state: RootState) => state.Image.id);
 
-  const UpdateProfile = async () => {
-    const dispatch = useDispatch();
-    await axios.post(`${backUrl}/profile/`, {}, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
-      }
-    })
-      .then(r => dispatch(storeThumbnail(r.data.image)));
-  };
   const ReadProfile = async () => {
     console.log(pk);
     const dispatch = useDispatch();
@@ -47,19 +39,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
         .catch(err => console.log(err));
     }
   };
-  const GetImg = async () => {
-    const dispatch = useDispatch();
-    // const thumbnail = useAppSelector(state => state.ThumbnailReducer);
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    await axios.get(`${thumbnail}`, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
-      }
-    })
-      .then(r => { dispatch(storeImage(r.data.image)); })
-      .catch(err => console.log(err));
-  };
+
   const getMyUser = async () => {
     await axios.get(`${backUrl}/token/user/`, {
       headers: {
@@ -80,7 +60,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
     void getMyUser();
     void ReadProfile();
     void GetImg();
-    console.log('Teset');
+    console.log(image);
   }, [thumbnail]);
   const closeModal = () => {
     onClickToggleModal(false);
