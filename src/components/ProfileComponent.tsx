@@ -5,11 +5,12 @@ import { ImgUpload, onChange } from '../features/ImgUpload';
 import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { storeImage } from '../redux/slices/ImageSlice';
-const thumbnail = useAppSelector(state => state.ThumbnailReducer);
-const image = useAppSelector(state => state.ImageReducer);
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+const thumbnail = useSelector((state: RootState) => state.Thumbnail.url);
+const image = useSelector((state: RootState) => state.Image.id);
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
@@ -23,7 +24,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const [lastname, setLastname] = useState('');
 
   const UpdateProfile = async () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     await axios.post(`${backUrl}/profile/`, {}, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -34,7 +35,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   };
   const ReadProfile = async () => {
     console.log(pk);
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     if (pk !== '') {
       await axios.get(`${backUrl}/profile/${pk}/`, {
         headers: {
@@ -47,10 +48,10 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
     }
   };
   const GetImg = async () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     // const thumbnail = useAppSelector(state => state.ThumbnailReducer);
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    await axios.get(`${thumbnail.url}`, {
+    await axios.get(`${thumbnail}`, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         Authorization: `Bearer ${AccessToken}`
@@ -113,7 +114,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
                       </div>
                   </ImageContainer>
-                  <img src={image.image}/>
+                  <img src={image}/>
                   <input type='button' value ='확인' onClick={() => { void UpdateProfile(); }} />
               </BodyContainer>
 

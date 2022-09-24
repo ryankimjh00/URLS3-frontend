@@ -4,12 +4,11 @@ import { ImageSlice } from './slices/ImageSlice';
 
 export const store = configureStore({
   reducer: {
-    ThumbnailReducer: ThumbnailSlice.reducer,
-    ImageReducer: ImageSlice.reducer
+    Thumbnail: ThumbnailSlice.reducer,
+    Image: ImageSlice.reducer
   }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type store
 export type AppDispatch = typeof store.dispatch;
