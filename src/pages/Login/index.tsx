@@ -62,7 +62,7 @@ const LogIn = () => {
           </form>
 
         </div>
-        <Link to='/'>회원가입 하러가기</Link>
+        <Link to='/signup'>회원가입 하러가기</Link>
 
         </body>
       </Container>
