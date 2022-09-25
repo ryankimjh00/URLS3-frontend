@@ -1,10 +1,11 @@
 
 import React from 'react';
+import AnalyticsSidebar from '../../components/AnalyticsSidebar';
 
 const Analytics = () => {
   return (
     <div>
-        hi
+        <AnalyticsSidebar/>
     </div>
   );
 };
