@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-const S3URL = styled.h3`
-  padding: 10px 0;
-  font-weight: 300;
-  :hover {
-    opacity: 0.9;
-    background-color: #FFF5DD;
-  }
-`;
+import { S3URL } from './S3URL';
+
 const SideBarWrap = styled.div`
   z-index: 5; 
   
@@ -35,10 +29,8 @@ const AnalyticsSidebar = () => {
   return (
       <SideBarWrap>
               <Links>
-                  <S3URL>링크1</S3URL>
+                  <S3URL url="url" s3="s3"/>
 
-                  <S3URL>링크2</S3URL>
-                  <S3URL>링크3</S3URL>
               </Links>
   </SideBarWrap>
   );
