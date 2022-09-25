@@ -38,7 +38,7 @@ export const NavComponent = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/deets">more</Nav.Link>
+                        <Nav.Link href="/analytics">Analytics S3</Nav.Link>
                         {loginStatus &&
                             <Nav.Link onClick={onClickToggleModal}>
                                 프로필
