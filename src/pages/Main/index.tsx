@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { backUrl } from '../../variable/url';
 
 const Main = () => {
+  const [url, setUrl] = useState('');
+
+  const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(e.target.value);
+  }, []);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    axios.post(`${backUrl}/s3`, {
+      url
+    }).catch(() => window.alert('로그인에러'));
+  };
   return (
 
         <MainContainer>
-          <form>
-              <Input name="url" placeholder="Shorten your link" />
-              <Button type="submit">S3</Button>
-          </form>
+            <form onSubmit={onSubmit}>
+                <Input name="url" onChange={urlHandler} placeholder="Shorten your link" />
+                <Button id="postUrl" type="submit">S3</Button>
+            </form>
+            <div>
+                <></>
+            </div>
         </MainContainer>
   );
 };
