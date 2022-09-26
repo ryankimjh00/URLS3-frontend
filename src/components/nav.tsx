@@ -14,8 +14,8 @@ export const NavComponent = () => {
 
   useEffect(() => {
     if (AccessToken !== undefined) setloginStatus(true);
+    else { setloginStatus(false); }
   }, [AccessToken]);
-
   return (
         <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
             <Container>
@@ -45,7 +45,7 @@ export const NavComponent = () => {
                             </Nav.Link>
                         }
                         {loginStatus &&
-                            <Nav.Link href="/login" onClick={LogOut}>
+                            <Nav.Link onClick={LogOut}>
                                 로그 아웃
                             </Nav.Link>
                         }
