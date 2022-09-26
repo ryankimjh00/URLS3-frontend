@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+// import QR from './image/qr-code.png';
 
 const Main = () => {
   return (
@@ -17,15 +18,19 @@ const Main = () => {
             <Br/>
                 <SecondDiv>
                     <SDiv>
-                        <img src="./image/qr-code.png" width="100%" height="100%"/>
+                        <Img src={ require('../image/qr-code.png') }/>
                     </SDiv>
                     <SDiv>
+                        <Img src={ require('../image/instagram.png') }/>
                     </SDiv>
                     <SDiv>
+                        <Img src={ require('../image/recent.png') }/>
                     </SDiv>
                     <SDiv>
+                        <Img src={ require('../image/analytics.png') }/>
                     </SDiv>
                     <SDiv>
+                        <Img src={ require('../image/technical-support.png') }/>
                     </SDiv>
                 </SecondDiv>
                 <ThirdDiv>
@@ -46,7 +51,7 @@ const Main = () => {
                     </TDiv>
                 </ThirdDiv>
             <Br/>
-            <br/>
+            <div style={{ width: '100%', height: '50px' }}></div>
         </MainContainer>
   );
 };
@@ -111,7 +116,7 @@ const SDiv = styled.div`
   font-weight: 400;
   font-size:20px;
   float:left;
-  margin-left:40px;
+  margin-left:38px;
   width:200px;
   height:200px;
   border:grey 0.15rem solid;
@@ -121,7 +126,7 @@ const SDiv = styled.div`
 const Br = styled.div`
   background-color: grey;
   opacity: 0.5;
-  height: 0.1rem;
+  height: 0.08rem;
   width: 90%;
   margin-left:5%;
   margin-right:5%;
@@ -139,9 +144,13 @@ const TDiv = styled.div`
   font-size:20px;
   text-align:center;
   float:left;
-  margin-left:40px;
+  margin-left:38px;
   width:200px;
   color:grey;
+`;
+const Img = styled.img`
+  width:60%;
+  margin:40px;
 `;
 // const Line = styled.div`
 //   border-left:thin solid grey;
