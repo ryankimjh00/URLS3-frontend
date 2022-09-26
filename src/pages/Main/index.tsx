@@ -11,21 +11,43 @@ const Main = () => {
                 </form>
             </MainDiv>
             <ServeDiv>
-                <Link className="slink">copy link</Link>
+                <FirstDiv>
+                    <Link className="slink">copy link</Link>
+                </FirstDiv>
+                <Button>copy</Button>
+                <SecondDiv>
+                    <SDiv>
+                        QR
+                    </SDiv>
+                    <SDiv>
+                        SNS
+                    </SDiv>
+                </SecondDiv>
             </ServeDiv>
-            <Button>copy</Button>
         </MainContainer>
   );
 };
 const MainContainer = styled.div`
   text-align: center;
-  background-color:grey;
+  background-color:#dcdcdc;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
+`;
+const ServeDiv = styled.div`
+  display: inline-block;
+  font-weight: 400;
+  outline: none;
+  position: center;
+  background-color: white;
+  width:90%;
+  height:500px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  
 `;
 const Input = styled.input`
   display: inline-block;
@@ -46,12 +68,11 @@ const Button = styled.button`
   color: #2997ff;
   border: 0;
 `;
-const ServeDiv = styled.div`
+const FirstDiv = styled.div`
   display: inline-block;
   font-weight: 400;
   outline: none;
   position: center;
-  background-color: white;
   width:40%;
   height:50px;
   font-size:20px;
@@ -64,8 +85,26 @@ const Link = styled.div`
   border-color: #1d1d1f;
   border:0.1rem solid;
   outline: none;
-  background-color: white;
+  background-color: #fafafa;
   width:95%;
   margin:10px;
+`;
+const SecondDiv = styled.div`
+  display: inline-block;
+  outline: none;
+  position: center;
+  width:60%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 10px;
+`;
+const SDiv = styled.div`
+  font-weight: 400;
+  font-size:20px;
+  float:left;
+  margin-left:50px;
+  background-color:#fafafa;
+  width:40%;
+  height:150px;
 `;
 export default Main;
