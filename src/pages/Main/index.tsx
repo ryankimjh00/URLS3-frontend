@@ -10,34 +10,22 @@ const Main = () => {
                     <Button type="submit">S3</Button>
                 </form>
             </MainDiv>
-            <ServeDiv className="slink">copy link</ServeDiv>
+            <ServeDiv>
+                <Link className="slink">copy link</Link>
+            </ServeDiv>
             <Button>copy</Button>
         </MainContainer>
   );
 };
 const MainContainer = styled.div`
-  padding-top: 25px;
-  padding-bottom: 25px;
   text-align: center;
-  background-color: black;
+  background-color:grey;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
-`;
-const ServeDiv = styled.div`
-  display: inline-block;
-  font-weight: 400;
-  border-radius: 8px;
-  border: 0;
-  outline: none;
-  text-align: center;
-  background-color: white;
-  width:30%;
-  font-size:20px;
-  
 `;
 const Input = styled.input`
   display: inline-block;
@@ -54,8 +42,30 @@ const Button = styled.button`
   display: inline-block;
   box-sizing: content-box;
   font-size: 20px;
-  background-color: black;
+  background-color: inherit;
   color: #2997ff;
   border: 0;
+`;
+const ServeDiv = styled.div`
+  display: inline-block;
+  font-weight: 400;
+  outline: none;
+  position: center;
+  background-color: white;
+  width:40%;
+  height:50px;
+  font-size:20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+`;
+const Link = styled.div`
+  font-weight: 400;
+  border-radius: 8px;
+  border-color: #1d1d1f;
+  border:0.1rem solid;
+  outline: none;
+  background-color: white;
+  width:95%;
+  margin:10px;
 `;
 export default Main;
