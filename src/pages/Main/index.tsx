@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 const Main = () => {
   return (
-
         <MainContainer>
-          <form>
-              <Input name="url" placeholder="Shorten your link" />
-              <Button type="submit">S3</Button>
-          </form>
+            <MainDiv>
+                <form>
+                    <Input name="url" placeholder="Shorten your link" />
+                    <Button type="submit">S3</Button>
+                </form>
+            </MainDiv>
+            <ServeDiv className="slink">copy link</ServeDiv>
+            <Button>copy</Button>
         </MainContainer>
   );
 };
@@ -17,6 +20,24 @@ const MainContainer = styled.div`
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
+`;
+const MainDiv = styled.div`
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+  background-color: black;
+`;
+const ServeDiv = styled.div`
+  display: inline-block;
+  font-weight: 400;
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+  text-align: center;
+  background-color: white;
+  width:30%;
+  font-size:20px;
+  
 `;
 const Input = styled.input`
   display: inline-block;
