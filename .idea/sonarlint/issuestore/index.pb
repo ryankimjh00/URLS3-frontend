@@ -18,8 +18,6 @@ B
 src/redux/store.ts,6\6\6687bbd9e0c8541a6b7e657278fc7e91e52f9a25
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-C
-src/variable/url.ts,4\2\427592981d080fc4f54f407ea9fac55bc6ca823f
 I
 src/features/ImgUpload.ts,0\8\08881eeab55da92d675aa7e78e44bbc83c53c9e6
 N
