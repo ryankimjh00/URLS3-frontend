@@ -10,44 +10,55 @@ const Main = () => {
                     <Button type="submit">S3</Button>
                 </form>
             </MainDiv>
-            <ServeDiv>
                 <FirstDiv>
                     <Link className="slink">copy link</Link>
                 </FirstDiv>
                 <Button>copy</Button>
+            <Br/>
                 <SecondDiv>
                     <SDiv>
-                        QR
+                        <img src="./image/qr-code.png" width="100%" height="100%"/>
                     </SDiv>
                     <SDiv>
-                        SNS
+                    </SDiv>
+                    <SDiv>
+                    </SDiv>
+                    <SDiv>
+                    </SDiv>
+                    <SDiv>
                     </SDiv>
                 </SecondDiv>
-            </ServeDiv>
+                <ThirdDiv>
+                    <TDiv>
+                        QR
+                    </TDiv>
+                    <TDiv>
+                        SNS
+                    </TDiv>
+                    <TDiv>
+                        Recent
+                    </TDiv>
+                    <TDiv>
+                        Analysis
+                    </TDiv>
+                    <TDiv>
+                        Technology
+                    </TDiv>
+                </ThirdDiv>
+            <Br/>
+            <br/>
         </MainContainer>
   );
 };
 const MainContainer = styled.div`
   text-align: center;
-  background-color:#dcdcdc;
+  background-color:white;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
-`;
-const ServeDiv = styled.div`
-  display: inline-block;
-  font-weight: 400;
-  outline: none;
-  position: center;
-  background-color: white;
-  width:90%;
-  height:500px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  
 `;
 const Input = styled.input`
   display: inline-block;
@@ -76,16 +87,14 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;
 const Link = styled.div`
   font-weight: 400;
-  border-radius: 8px;
-  border-color: #1d1d1f;
-  border:0.1rem solid;
+  border:grey 0.1rem solid;
+  opacity:0.7;
   outline: none;
-  background-color: #fafafa;
   width:95%;
   margin:10px;
 `;
@@ -93,18 +102,53 @@ const SecondDiv = styled.div`
   display: inline-block;
   outline: none;
   position: center;
-  width:60%;
+  width:100%;
   margin-top: 25px;
-  margin-bottom: 25px;
-  padding: 10px;
+  padding:20px;
+  padding-bottom:1px;
 `;
 const SDiv = styled.div`
   font-weight: 400;
   font-size:20px;
   float:left;
-  margin-left:50px;
-  background-color:#fafafa;
-  width:40%;
-  height:150px;
+  margin-left:40px;
+  width:200px;
+  height:200px;
+  border:grey 0.15rem solid;
+  border-radius:50%;
+  opacity:0.5;
 `;
+const Br = styled.div`
+  background-color: grey;
+  opacity: 0.5;
+  height: 0.1rem;
+  width: 90%;
+  margin-left:5%;
+  margin-right:5%;
+`;
+const ThirdDiv = styled.div`
+  display: inline-block;
+  outline: none;
+  position: center;
+  width:100%;
+  padding-left:20px;
+  padding-bottom:20px;
+`;
+const TDiv = styled.div`
+  font-weight: 400;
+  font-size:20px;
+  text-align:center;
+  float:left;
+  margin-left:40px;
+  width:200px;
+  color:grey;
+`;
+// const Line = styled.div`
+//   border-left:thin solid grey;
+//   height: 200px;
+//   width:1px;
+//   float:left;
+//   margin-left:20px;
+//   margin-right:20px;
+// `;
 export default Main;
