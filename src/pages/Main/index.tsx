@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import QR from 'qrcode.react';
 
 const Main = () => {
   return (
@@ -17,7 +18,14 @@ const Main = () => {
             <Br/>
                 <SecondDiv>
                     <SDiv>
-                        <Img src={ require('../../image/qr-code.png') }/>
+                        <QR
+                            id="qr-gen"
+                            size={120}
+                            value={'https://github.com/Team-Discipline'}
+                            includeMargin={false} // QR 테두리 여부
+                            fgColor={'black'} // QR색
+                            style={{ margin: '40px' }}
+                         />
                     </SDiv>
                     <SDiv>
                         <Img src={ require('../../image/instagram.png') }/>
@@ -119,8 +127,7 @@ const SDiv = styled.div`
   width:200px;
   height:200px;
   border:grey 0.15rem solid;
-  border-radius:50%;
-  opacity:0.5;
+  border-radius:50%; 
 `;
 const Br = styled.div`
   background-color: grey;
