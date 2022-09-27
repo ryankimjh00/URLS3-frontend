@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { ThumbnailSlice } from './slices/ThumbnailSlice';
 import { ImageSlice } from './slices/ImageSlice';
+import { UserSlice } from './slices/UserSlice';
 
 export const store = configureStore({
   reducer: {
     Thumbnail: ThumbnailSlice.reducer,
-    Image: ImageSlice.reducer
+    Image: ImageSlice.reducer,
+    User: UserSlice.reducer
   }
 });
 

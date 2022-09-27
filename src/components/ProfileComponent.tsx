@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ImgUpload, onChange } from '../features/ImgUpload';
 import axios from 'axios';
@@ -9,6 +9,7 @@ import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { storeImage } from '../redux/slices/ImageSlice';
+import { storeUser } from '../redux/slices/UserSlice';
 
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -16,13 +17,9 @@ interface Props{
 }
 
 const ProfileComponent = ({ onClickToggleModal }: Props) => {
-  const [pk, setPk] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
   const thumbnail = useSelector((state: RootState) => state.Thumbnail.url);
   const image = useSelector((state: RootState) => state.Image.id);
+  const user = useSelector((state: RootState) => state.User);
   const dispatch = useDispatch();
   // 1. getMyUser로 로그인한 내 정보들 불러옴
   //   2. 위에서 불러온 pk로 ReadProfile() 실행, 썸네일 주소 리덕스에 저장
@@ -41,9 +38,9 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       .catch(err => console.log(err));
   };
   const ReadProfile = async () => {
-    console.log(pk);
-    if (pk !== '') {
-      await axios.get(`${backUrl}/profile/${pk}/`, {
+    console.log(user.pk);
+    if (user.pk !== -1) {
+      await axios.get(`${backUrl}/profile/${user.pk}/`, {
         headers: {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           Authorization: `Bearer ${AccessToken}`
@@ -73,11 +70,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       }
     })
       .then(r => {
-        setPk(r.data.pk);
-        setUsername(r.data.username);
-        setEmail(r.data.email);
-        setFirstname(r.data.first_name);
-        setLastname(r.data.last_name);
+        dispatch(storeUser(r.data));
       })
       .catch((err) => { console.log(err); });
   };
@@ -106,11 +99,11 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                   </Close>
               </Header>
               <BodyContainer>
-                  <h3>pk: {pk}</h3>
-                  <h3>username: {username}</h3>
-                  <h3>email: {email}</h3>
-                  <h3>first_name: {firstname}</h3>
-                  <h3>last_name: {lastname}</h3>
+                  <h3>pk: {user.pk}</h3>
+                  <h3>username: {user.username}</h3>
+                  <h3>email: {user.email}</h3>
+                  <h3>first_name: {user.first_name}</h3>
+                  <h3>last_name: {user.last_name}</h3>
                   <ImageContainer>
                       <div>
                           <input type='file'
