@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import QR from './image/qr-code.png';
 
 const Main = () => {
   return (
@@ -18,19 +17,19 @@ const Main = () => {
             <Br/>
                 <SecondDiv>
                     <SDiv>
-                        <Img src={ require('../image/qr-code.png') }/>
+                        <Img src={ require('../../image/qr-code.png') }/>
                     </SDiv>
                     <SDiv>
-                        <Img src={ require('../image/instagram.png') }/>
+                        <Img src={ require('../../image/instagram.png') }/>
                     </SDiv>
                     <SDiv>
-                        <Img src={ require('../image/recent.png') }/>
+                        <Img src={ require('../../image/recent.png') }/>
                     </SDiv>
                     <SDiv>
-                        <Img src={ require('../image/analytics.png') }/>
+                        <Img src={ require('../../image/analytics.png') }/>
                     </SDiv>
                     <SDiv>
-                        <Img src={ require('../image/technical-support.png') }/>
+                        <Img src={ require('../../image/technical-support.png') }/>
                     </SDiv>
                 </SecondDiv>
                 <ThirdDiv>
