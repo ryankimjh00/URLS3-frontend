@@ -18,9 +18,9 @@ B
 src/redux/store.ts,6\6\6687bbd9e0c8541a6b7e657278fc7e91e52f9a25
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-C
-src/variable/url.ts,4\2\427592981d080fc4f54f407ea9fac55bc6ca823f
-I
-src/features/ImgUpload.ts,0\8\08881eeab55da92d675aa7e78e44bbc83c53c9e6
 N
 src/redux/slices/ImageSlice.ts,6\6\66d00a0b58bfa4ab82906f63c7d205f985a1eb12
+R
+"src/redux/slices/ThumbnailSlice.ts,a\8\a81506de1b4c75905d0d379c4a0a96e3f5cc2894
+E
+src/variable/token.ts,6\4\6429aaa14fc26469a9c50cbfa4e89dd19e1bacaf
