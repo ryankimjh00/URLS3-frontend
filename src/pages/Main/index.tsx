@@ -15,6 +15,7 @@ const Main = () => {
       url
     }).catch(() => window.alert('로그인에러'));
   };
+
   return (
         <MainContainer>
           <MainDiv>

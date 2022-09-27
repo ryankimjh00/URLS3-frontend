@@ -9,8 +9,6 @@ import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { storeImage } from '../redux/slices/ImageSlice';
-import { storeUser } from '../redux/slices/UserSlice';
-
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
@@ -62,23 +60,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
         console.log('Updated!!');
       });
   };
-  const getMyUser = async () => {
-    await axios.get(`${backUrl}/token/user/`, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
-      }
-    })
-      .then(r => {
-        dispatch(storeUser(r.data));
-      })
-      .catch((err) => { console.log(err); });
-  };
-  try {
-    void getMyUser();
-  } catch {
-    console.log('유저정보 불러오기 실패');
-  }
+
   useEffect(() => {
     void ReadProfile();
     void GetImg();

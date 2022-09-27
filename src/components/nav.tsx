@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { LogOut } from '../features/Logout';
 import { AccessToken } from '../variable/token';
 import ProfileComponent from './ProfileComponent';
-
+import { getMyUser } from '../features/getMyUser';
 export const NavComponent = () => {
   const [loginStatus, setloginStatus] = useState(false);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
@@ -16,6 +16,10 @@ export const NavComponent = () => {
     if (AccessToken !== undefined) setloginStatus(true);
     else { setloginStatus(false); }
   }, [AccessToken]);
+
+  if (AccessToken !== undefined) {
+    void getMyUser();
+  }
   return (
         <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
             <Container>
