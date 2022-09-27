@@ -4,6 +4,8 @@ import { S3URL } from './S3URL';
 import { backUrl } from '../variable/url';
 import axios from 'axios';
 import { AccessToken } from '../variable/token';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const SideBarWrap = styled.div`
   z-index: 5; 
@@ -31,18 +33,15 @@ const Links = styled.div`
 interface S3{
   url: string
   issuer: number
-
   s3_url: string
-
   target_url: string
-
   created_at: string
-
   updated_at: string
 
 }
 const AnalyticsSidebar = () => {
   const [S3List, setS3List] = useState<S3[]>([]);
+  const user = useSelector((state: RootState) => state.User);
   const getS3List = async () => {
     await axios.get(`${backUrl}/s3/`, {
       headers: {
@@ -64,10 +63,10 @@ const AnalyticsSidebar = () => {
               <Links>
                   <S3URL url="url" s3="s3"/>
                   {
-                      S3List.map(s3 => {
+                      S3List.filter(s3 => s3.issuer === user.pk).map(s3 => {
                         return (
                         // eslint-disable-next-line react/jsx-key
-                              <S3URL url={s3.target_url} s3={s3.url}/>
+                            <S3URL url={s3.target_url} s3={s3.url}/>
                         );
                       })
 
