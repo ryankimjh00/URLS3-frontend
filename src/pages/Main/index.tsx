@@ -12,9 +12,9 @@ const Main = () => {
                 </form>
             </MainDiv>
                 <FirstDiv>
-                    <Link className="slink">copy link</Link>
+                    <Link id="slink">copy link</Link>
                 </FirstDiv>
-                <Button>copy</Button>
+                <Button onClick={async () => await navigator.clipboard.writeText('copy')}>copy</Button>
             <Br/>
                 <SecondDiv>
                     <SDiv>
@@ -22,9 +22,9 @@ const Main = () => {
                             id="qr-gen"
                             size={120}
                             value={'https://github.com/Team-Discipline'}
-                            includeMargin={false} // QR 테두리 여부
-                            fgColor={'black'} // QR색
-                            style={{ margin: '40px' }}
+                            includeMargin={false}
+                            fgColor={'black'}
+                            style={{ margin: '15%' }}
                          />
                     </SDiv>
                     <SDiv>
@@ -99,8 +99,8 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 4%;
+  margin-bottom: 4%;
 `;
 const Link = styled.div`
   font-weight: 400;
@@ -115,24 +115,22 @@ const SecondDiv = styled.div`
   outline: none;
   position: center;
   width:100%;
-  margin-top: 25px;
-  padding:20px;
-  padding-bottom:1px;
+  margin-top: 3%;
+  margin-bottom:2%;
 `;
 const SDiv = styled.div`
   font-weight: 400;
   font-size:20px;
   float:left;
-  margin-left:38px;
-  width:200px;
-  height:200px;
-  border:grey 0.15rem solid;
-  border-radius:50%; 
+  margin-left:4%;
+  width:15%;
+  // border:grey 0.15rem solid;
+  // border-radius:50%; 
 `;
 const Br = styled.div`
   background-color: grey;
   opacity: 0.5;
-  height: 0.08rem;
+  height: 0.1rem;
   width: 90%;
   margin-left:5%;
   margin-right:5%;
@@ -142,28 +140,20 @@ const ThirdDiv = styled.div`
   outline: none;
   position: center;
   width:100%;
-  padding-left:20px;
-  padding-bottom:20px;
+  padding-bottom:4%;
 `;
 const TDiv = styled.div`
   font-weight: 400;
-  font-size:20px;
   text-align:center;
+  font-size:20px;
   float:left;
-  margin-left:38px;
-  width:200px;
+  margin-left:4%;
+  width:15%;
   color:grey;
 `;
 const Img = styled.img`
   width:60%;
-  margin:40px;
+  margin:20%;
 `;
-// const Line = styled.div`
-//   border-left:thin solid grey;
-//   height: 200px;
-//   width:1px;
-//   float:left;
-//   margin-left:20px;
-//   margin-right:20px;
-// `;
+
 export default Main;
