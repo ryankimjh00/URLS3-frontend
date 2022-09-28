@@ -19,10 +19,10 @@ const LogIn = () => {
       username: Username,
       password
 
-    })
+    }, { withCredentials: true })
       .then((res) => {
         setCookie('LoginToken', res.data);
-        location.replace('/main');
+        location.replace('/');
       }).catch(() => window.alert('로그인에러'));
   };
 

@@ -36,7 +36,7 @@ const SignUp = () => {
     })
       .then((res) => {
         setCookie('LoginToken', res.data);
-        location.replace('/main');
+        location.replace('/');
       })
       .catch(() => { setSignUpErr('이미 있는 이름이거나 비밀번호가 너무 단순합니다'); });
   };
@@ -49,7 +49,7 @@ const SignUp = () => {
     }
   };
   useEffect(() => {
-    if (LoginToken !== undefined)location.replace('/main');
+    if (LoginToken !== undefined)location.replace('/');
     console.log(LoginToken);
   }, []);
   return (
