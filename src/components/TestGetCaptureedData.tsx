@@ -11,16 +11,18 @@ interface test{
 const TestGetCaptureedData = (props: test) => {
   const [CapturedDatas, setCapturedDatas] = useState<CapturedDataType[]>();
   const getS3CD = async () => {
-    await axios.get(`${backUrl}/analytics/${props.s3_id}/`, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
+    if (props.s3_id > 0) {
+      await axios.get(`${backUrl}/analytics/${props.s3_id}/`, {
+        headers: {
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          Authorization: `Bearer ${AccessToken}`
+        }
       }
-    }
 
-    ).then(r => {
-      setCapturedDatas(r.data);
-    });
+      ).then(r => {
+        setCapturedDatas(r.data);
+      });
+    }
   };
   useEffect(() => {
     void getS3CD();
