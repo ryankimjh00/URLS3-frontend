@@ -9,7 +9,7 @@ import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { storeImage } from '../redux/slices/ImageSlice';
-import {UpdateProfile} from "../features/UpdataProfile";
+import { UpdateProfile } from '../features/UpdataProfile';
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void

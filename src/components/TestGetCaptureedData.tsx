@@ -3,7 +3,6 @@ import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
 import { CapturedDataType } from '../interface/CapturedDataType';
-
 interface test{
   s3_id: number
 }
@@ -33,7 +32,22 @@ const TestGetCaptureedData = (props: test) => {
         {CapturedDatas?.map(CD => {
           return (
               // eslint-disable-next-line react/jsx-key
-              <div>{CD.id}</div>
+              <div>
+
+                <div>id :{CD.id}</div>
+                <div>city: {CD.city}</div>
+                <div>created_at: {CD.created_at}</div>
+                <div>country: {CD.country}</div>
+                <div>js_reqeust_time_UTC: {CD.js_reqeust_time_UTC}</div>
+                <div>latitude: {CD.latitude}</div>
+                <div>longitude: {CD.longitude}</div>
+                <div>page_leave_time: {CD.page_leave_time}</div>
+                <div>page_loaded_time: {CD.page_loaded_time}</div>
+                <div>referer_url: {CD.referer_url}</div>
+                <div>s3: {CD.s3}</div>
+
+              </div>
+
           );
         })}
       </div>

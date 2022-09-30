@@ -4,6 +4,7 @@ import AnalyticsSidebar from '../../components/AnalyticsSidebar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import TestGetCaptureedData from '../../components/TestGetCaptureedData';
+import styled from 'styled-components';
 
 const Analytics = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -12,10 +13,17 @@ const Analytics = () => {
   return (
     <div>
         <AnalyticsSidebar/>
-        <h1>{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}{s3_id}</h1>
-        <TestGetCaptureedData s3_id={s3_id}/>
+        <TestArea><TestGetCaptureedData s3_id={s3_id}/></TestArea>
     </div>
   );
 };
 
 export default Analytics;
+
+const TestArea = styled.div`
+  position: absolute;
+  top: 300px;
+  left: 300px;
+  z-index: 10;
+  font-size: large;
+`;
