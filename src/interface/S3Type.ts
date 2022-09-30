@@ -1,4 +1,4 @@
-export interface S3{
+export interface S3Type{
   id: number
   url: string
   issuer: number

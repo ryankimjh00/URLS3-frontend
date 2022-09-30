@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import { S3 } from '../interface/S3';
+import { S3Type } from '../interface/S3Type';
 
-export const S3URL = (props: S3) => {
+export const S3URL = (props: S3Type) => {
   return (
        <S3url>{props.url}:{props.s3_url}</S3url>
   );

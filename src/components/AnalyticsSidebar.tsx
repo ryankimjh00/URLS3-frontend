@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { S3URL } from './S3URL';
 import { backUrl } from '../variable/url';
@@ -6,7 +6,7 @@ import axios from 'axios';
 import { AccessToken } from '../variable/token';
 import { useDispatch } from 'react-redux';
 import { storeFocusedS3 } from '../redux/slices/FocusedS3Slice';
-import { S3 } from '../interface/S3';
+import { S3Type } from '../interface/S3Type';
 
 const SideBarWrap = styled.div`
   z-index: 5; 
@@ -33,7 +33,7 @@ const Links = styled.div`
 `;
 const AnalyticsSidebar = () => {
   const dispatch = useDispatch();
-  const [S3List, setS3List] = useState<S3[]>([]);
+  const [S3List, setS3List] = useState<S3Type[]>([]);
   const getS3List = async () => {
     await axios.get(`${backUrl}/s3/`, {
       headers: {
@@ -47,10 +47,9 @@ const AnalyticsSidebar = () => {
     }).catch(e => console.log(e));
   };
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const FocusingS3 = (s3_id: number) => {
+  const FocusingS3 = useCallback((s3_id: number) => {
     dispatch(storeFocusedS3(s3_id));
-    console.log(s3_id);
-  };
+  }, []);
   useEffect(() => {
     void getS3List();
   }, []);
@@ -61,7 +60,7 @@ const AnalyticsSidebar = () => {
                       S3List.map(s3 => {
                         return (
                         // eslint-disable-next-line react/jsx-key
-                            <span onClick={() => FocusingS3(s3.id)}><S3URL id={s3.id} url={s3.url} issuer={s3.issuer} s3_url={s3.s3_url} target_url={s3.target_url} created_at={s3.created_at} updated_at={s3.updated_at}/></span>
+                            <span onClick={() => FocusingS3(s3.id)}><S3URL id={s3.id} url={s3.url} issuer={s3.issuer} s3_url={s3.s3_url} target_url={s3.target_url} created_at={s3.created_at} updated_at={s3.updated_at} key={s3.id}/></span>
                         );
                       })
 
