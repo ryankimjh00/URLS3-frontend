@@ -10,7 +10,7 @@ export const FocusedS3Slice = createSlice({
   },
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    storeImage: (state, action: PayloadAction<number>) => {
+    storeFocusedS3: (state, action: PayloadAction<number>) => {
       state.s3_id = action.payload;
     }
   }

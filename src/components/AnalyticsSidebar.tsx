@@ -61,7 +61,7 @@ const AnalyticsSidebar = () => {
                       S3List.map(s3 => {
                         return (
                         // eslint-disable-next-line react/jsx-key
-                            <span onClick={FocusingS3(s3.id)}><S3URL id={s3.id} url={s3.url} issuer={s3.issuer} s3_url={s3.s3_url} target_url={s3.target_url} created_at={s3.created_at} updated_at={s3.updated_at}/></span>
+                            <span onClick={() => FocusingS3(s3.id)}><S3URL id={s3.id} url={s3.url} issuer={s3.issuer} s3_url={s3.s3_url} target_url={s3.target_url} created_at={s3.created_at} updated_at={s3.updated_at}/></span>
                         );
                       })
 
