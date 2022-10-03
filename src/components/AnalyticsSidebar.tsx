@@ -88,6 +88,7 @@ const AnalyticsSidebar = () => {
                             }
                                   onContextMenu={e => {
                                     e.preventDefault();
+                                    FocusingS3(s3.id);
                                     console.log('사이드바 메뉴열기!');
                                     setx(e.clientX);
                                     sety(e.clientY);
