@@ -10,7 +10,7 @@ const AnalyticsSideberMenu = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const s3_id = useSelector((state: RootState) => state.FocusedS3.s3_id);
   const deleteS3 = async () => {
-    await axios.post(`${backUrl}/s3/${s3_id}/`, {
+    await axios.delete(`${backUrl}/s3/${s3_id}/`, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         Authorization: `Bearer ${AccessToken}`

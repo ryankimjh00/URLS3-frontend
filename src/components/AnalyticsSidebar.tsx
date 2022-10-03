@@ -60,8 +60,6 @@ const AnalyticsSidebar = () => {
   }, []);
   useEffect(() => {
     void getS3List();
-  }, []);
-  useEffect(() => {
     // channelMenuRef 를 이용해 이외의 영역이 클릭되면 채널메뉴 없애기
     function handleClickOutside (e: MouseEvent): void {
       if ((sideS3MenuRef.current != null) && !sideS3MenuRef.current.contains(e.target as Node)) {
@@ -73,7 +71,7 @@ const AnalyticsSidebar = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [sideS3MenuRef]);
+  }, []);
   return (
       <SideBarWrap>
               <Links>
@@ -103,7 +101,7 @@ const AnalyticsSidebar = () => {
 
               </Links>
         {sideS3Menu && (
-            <div style={{ position: 'absolute', top: y, left: x }}>
+            <div style={{ position: 'absolute', top: y - 57, left: x }}>
               <AnalyticsSideberMenu/>
             </div>
         )}
