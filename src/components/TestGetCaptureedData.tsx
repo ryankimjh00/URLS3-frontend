@@ -3,11 +3,11 @@ import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
 import { CapturedDataType } from '../interface/CapturedDataType';
-interface test{
+interface testType{
   s3_id: number
 }
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const TestGetCaptureedData = (props: test) => {
+const TestGetCaptureedData = (props: testType) => {
   const [CapturedDatas, setCapturedDatas] = useState<CapturedDataType[]>();
   const getS3CD = async () => {
     if (props.s3_id > 0) {
@@ -20,6 +20,7 @@ const TestGetCaptureedData = (props: test) => {
 
       ).then(r => {
         setCapturedDatas(r.data);
+        if (r.data.length === 0)console.log('get CD, but no data');
       });
     }
   };
@@ -38,7 +39,7 @@ const TestGetCaptureedData = (props: test) => {
                 <div>city: {CD.city}</div>
                 <div>created_at: {CD.created_at}</div>
                 <div>country: {CD.country}</div>
-                <div>js_reqeust_time_UTC: {CD.js_reqeust_time_UTC}</div>
+                <div>js_request_time_UTC: {CD.js_request_time_UTC}</div>
                 <div>latitude: {CD.latitude}</div>
                 <div>longitude: {CD.longitude}</div>
                 <div>page_leave_time: {CD.page_leave_time}</div>

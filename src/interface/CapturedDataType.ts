@@ -1,7 +1,7 @@
 export interface CapturedDataType{
   id: number
   ip_address: string
-  js_reqeust_time_UTC: string
+  js_request_time_UTC: string
   page_loaded_time: string
   page_leave_time: string
   referer_url: string

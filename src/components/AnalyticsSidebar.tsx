@@ -10,7 +10,7 @@ import { S3Type } from '../interface/S3Type';
 import AnalyticsSideberMenu from './AnalyticsSideberMenu';
 
 const SideBarWrap = styled.div`
-  z-index: 5; 
+  z-index: -1; 
   
   background-color: #e7e4e1; 
   height: 100%;  width:20%;  
@@ -81,11 +81,12 @@ const AnalyticsSidebar = () => {
                       S3List.map(s3 => {
                         return (
                         // eslint-disable-next-line react/jsx-key
-                            <span ref={sideS3MenuRef} onClick={(e) => {
-                              e.preventDefault();
-                              FocusingS3(s3.id);
-                            }
-                            }
+                            <span ref={sideS3MenuRef}
+                                  onClick={() => {
+                                    FocusingS3(s3.id);
+                                    console.log('clidke0');
+                                  }
+                                  }
                                   onContextMenu={e => {
                                     e.preventDefault();
                                     FocusingS3(s3.id);
@@ -94,7 +95,7 @@ const AnalyticsSidebar = () => {
                                     sety(e.clientY);
                                     sideS3Menu && onClickshowChannelMenu();
                                     onClickshowChannelMenu();
-                                  }}><S3URL id={s3.id} url={s3.url} issuer={s3.issuer} s3_url={s3.s3_url} target_url={s3.target_url} created_at={s3.created_at} updated_at={s3.updated_at} key={s3.id}/></span>
+                                  }}><S3URL key={s3.id} id={s3.id} target_url={s3.target_url} issuer={s3.issuer} s3_url={s3.s3_url} created_at={s3.created_at} updated_at={s3.updated_at}/></span>
                         );
                       })
 

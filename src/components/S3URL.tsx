@@ -4,7 +4,7 @@ import { S3Type } from '../interface/S3Type';
 
 export const S3URL = (props: S3Type) => {
   return (
-       <S3url>{props.url}:{props.s3_url}</S3url>
+       <S3url>{props.target_url}:{props.s3_url}</S3url>
   );
 };
 
