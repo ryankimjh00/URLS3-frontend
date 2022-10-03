@@ -4,10 +4,11 @@ import { S3URL } from './S3URL';
 import { backUrl } from '../variable/url';
 import axios from 'axios';
 import { AccessToken } from '../variable/token';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { storeFocusedS3 } from '../redux/slices/FocusedS3Slice';
 import { S3Type } from '../interface/S3Type';
 import AnalyticsSideberMenu from './AnalyticsSideberMenu';
+import { RootState } from '../redux/store';
 
 const SideBarWrap = styled.div`
   z-index: -1; 
@@ -37,6 +38,7 @@ const AnalyticsSidebar = () => {
   const [x, setx] = useState(0);
   const [y, sety] = useState(0);
   const [S3List, setS3List] = useState<S3Type[]>([]);
+  const UpdateState = useSelector((state: RootState) => state.Update.x);
   const [sideS3Menu, setOnOffsideS3Menu] = useState(false);
   const sideS3MenuRef = useRef<HTMLDivElement>(null);
   const getS3List = async () => {
@@ -71,7 +73,7 @@ const AnalyticsSidebar = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [UpdateState, sideS3MenuRef]);
   return (
       <SideBarWrap>
               <Links>

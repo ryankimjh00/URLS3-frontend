@@ -1,14 +1,16 @@
 import React from 'react';
 import { backUrl } from '../variable/url';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { AccessToken } from '../variable/token';
 import styled from 'styled-components';
+import { onUpdate } from '../redux/slices/UpdateSlice';
 
 const AnalyticsSideberMenu = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const s3_id = useSelector((state: RootState) => state.FocusedS3.s3_id);
+  const dispatch = useDispatch();
   const deleteS3 = async () => {
     await axios.delete(`${backUrl}/s3/${s3_id}/`, {
       headers: {
@@ -16,7 +18,10 @@ const AnalyticsSideberMenu = () => {
         Authorization: `Bearer ${AccessToken}`
       }
     }
-    ).then(() => console.log('delete S3'));
+    ).then(() => {
+      dispatch(onUpdate());
+      console.log('delete S3');
+    });
   };
   return (
       <Menu>
