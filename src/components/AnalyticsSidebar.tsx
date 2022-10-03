@@ -50,6 +50,7 @@ const AnalyticsSidebar = () => {
     }
 
     ).then(r => {
+      window.alert('생성된 S3가 없습니다.');
       setS3List(r.data);
     }).catch(e => console.log(e));
   };
