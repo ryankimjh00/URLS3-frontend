@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
+import QR from 'qrcode.react';
 
 const Main = () => {
   const [url, setUrl] = useState('');
@@ -24,44 +25,51 @@ const Main = () => {
               <Button id="postUrl" type="submit">S3</Button>
             </form>
           </MainDiv>
-            <ServeDiv>
-                <FirstDiv>
-                    <Link className="slink">copy link</Link>
+            <FirstDiv>
+                    <Link id="slink">copy link</Link>
                 </FirstDiv>
-                <Button>copy</Button>
+                <Button onClick={async () => await navigator.clipboard.writeText('copy')}>copy</Button>
+            <Br/>
                 <SecondDiv>
                     <SDiv>
-                        QR
+                        <QR
+                            id="qr-gen"
+                            size={120}
+                            value={'https://github.com/Team-Discipline'}
+                            includeMargin={false}
+                            fgColor={'black'}
+                            style={{ margin: '15%' }}
+                         />
                     </SDiv>
                     <SDiv>
                         SNS
                     </SDiv>
                 </SecondDiv>
-            </ServeDiv>
+                <ThirdDiv>
+                    <TDiv>
+                        QR
+                    </TDiv>
+                    <TDiv>
+                        SNS
+                    </TDiv>
+                </ThirdDiv>
+            <Br/>
+                <FourthDiv>
+                    Technology
+                </FourthDiv>
+            <div style={{ width: '100%', height: '50px' }}></div>
         </MainContainer>
   );
 };
 const MainContainer = styled.div`
   text-align: center;
-  //background-color:#dcdcdc;
+  background-color:white;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
-`;
-const ServeDiv = styled.div`
-  display: inline-block;
-  font-weight: 400;
-  outline: none;
-  position: center;
-  background-color: white;
-  width:90%;
-  height:500px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  
 `;
 const Input = styled.input`
   display: inline-block;
@@ -90,16 +98,14 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 4%;
+  margin-bottom: 4%;
 `;
 const Link = styled.div`
   font-weight: 400;
-  border-radius: 8px;
-  border-color: #1d1d1f;
-  border:0.1rem solid;
+  border:grey 0.1rem solid;
+  opacity:0.7;
   outline: none;
-  background-color: #fafafa;
   width:95%;
   margin:10px;
 `;
@@ -107,18 +113,48 @@ const SecondDiv = styled.div`
   display: inline-block;
   outline: none;
   position: center;
-  width:60%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding: 10px;
+  width:100%;
+  margin-top: 3%;
+  margin-bottom:2%;
 `;
 const SDiv = styled.div`
   font-weight: 400;
   font-size:20px;
   float:left;
-  margin-left:50px;
-  //background-color:#fafafa;
-  width:40%;
-  height:150px;
+  margin-left:4%;
+  width:15%;
+  // border:grey 0.15rem solid;
+  // border-radius:50%; 
+`;
+const Br = styled.div`
+  background-color: grey;
+  opacity: 0.5;
+  height: 0.1rem;
+  width: 90%;
+  margin-left:5%;
+  margin-right:5%;
+`;
+const ThirdDiv = styled.div`
+  display: inline-block;
+  outline: none;
+  position: center;
+  width:100%;
+  padding-bottom:4%;
+`;
+const FourthDiv = styled.div`
+  display: inline-block;
+  outline: none;
+  position: center;
+  width:100%;
+  padding-bottom:4%;
+`;
+const TDiv = styled.div`
+  font-weight: 400;
+  text-align:center;
+  font-size:20px;
+  float:left;
+  margin-left:4%;
+  width:15%;
+  color:grey;
 `;
 export default Main;
