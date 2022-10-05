@@ -13,12 +13,23 @@ const Main = () => {
   // const s3Handler = async () => {
   //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
   // };
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post(`${backUrl}/s3`, {
+    axios.post(`${backUrl}/s3/`, {
       target_url: url
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
+    }, {
+      withCredentials: true,
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`,
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+      //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      .then(json => alert(JSON.stringify(json)))
+      .catch(() => window.alert('에러'));
   };
   return (
         <MainContainer>
