@@ -3,6 +3,16 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
 import QR from 'qrcode.react';
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  LineShareButton,
+  LineIcon
+} from 'react-share';
 
 const Main = () => {
   const [url, setUrl] = useState('');
@@ -31,25 +41,42 @@ const Main = () => {
                 <Button onClick={async () => await navigator.clipboard.writeText('copy')}>copy</Button>
             <Br/>
                 <SecondDiv>
-                    <SDiv>
+                    <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
                         <QR
                             id="qr-gen"
-                            size={120}
-                            value={'https://github.com/Team-Discipline'}
+                            size={150}
+                            value={url}
                             includeMargin={false}
                             fgColor={'black'}
                             style={{ margin: '15%' }}
                          />
                     </SDiv>
                     <SDiv>
-                        SNS
+                        <FacebookShareButton style={{ margin: '15%' }} url={url}>
+                            <FacebookIcon size={150} round={true} borderRadius={24}></FacebookIcon>
+                        </FacebookShareButton>
+                    </SDiv>
+                    <SDiv>
+                        <FacebookMessengerShareButton style={{ margin: '15%' }} url={url} appId={''}>
+                            <FacebookMessengerIcon size={150} round={true} borderRadius={24}></FacebookMessengerIcon>
+                        </FacebookMessengerShareButton>
+                    </SDiv>
+                    <SDiv>
+                        <TwitterShareButton style={{ margin: '15%' }} url={url}>
+                            <TwitterIcon size={150} round={true} borderRadius={24}></TwitterIcon>
+                        </TwitterShareButton>
+                    </SDiv>
+                    <SDiv>
+                        <LineShareButton style={{ margin: '15%' }} url={url}>
+                            <LineIcon size={150} round={true} borderRadius={24}></LineIcon>
+                        </LineShareButton>
                     </SDiv>
                 </SecondDiv>
                 <ThirdDiv>
-                    <TDiv>
+                    <TDiv style={{ marginLeft: '10%' }}>
                         QR
                     </TDiv>
-                    <TDiv>
+                    <TDiv style={{ marginLeft: '30%' }}>
                         SNS
                     </TDiv>
                 </ThirdDiv>
@@ -121,10 +148,7 @@ const SDiv = styled.div`
   font-weight: 400;
   font-size:20px;
   float:left;
-  margin-left:4%;
   width:15%;
-  // border:grey 0.15rem solid;
-  // border-radius:50%; 
 `;
 const Br = styled.div`
   background-color: grey;
@@ -153,7 +177,6 @@ const TDiv = styled.div`
   text-align:center;
   font-size:20px;
   float:left;
-  margin-left:4%;
   width:15%;
   color:grey;
 `;
