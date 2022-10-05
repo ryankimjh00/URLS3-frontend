@@ -5,22 +5,22 @@ import { backUrl } from '../../variable/url';
 import { AccessToken } from '../../variable/token';
 
 const Main = () => {
-    const [url, setUrl] = useState('');
+  const [url, setUrl] = useState('');
 
-    const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setUrl(e.target.value);
-    }, []);
-    // const s3Handler = async () => {
-    //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
-    // };
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        await axios.post(`${backUrl}/s3`, {
-            target_url: url
-            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
-    };
-    return (
+  const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(e.target.value);
+  }, []);
+  // const s3Handler = async () => {
+  //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
+  // };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await axios.post(`${backUrl}/s3`, {
+      target_url: url
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
+  };
+  return (
         <MainContainer>
             <MainDiv>
                 <form onSubmit={onSubmit}>
@@ -36,7 +36,7 @@ const Main = () => {
                 <div style={{ width: '100%', height: '50px' }}></div>
             </ServeDiv>
         </MainContainer>
-    );
+  );
 };
 const MainContainer = styled.div`
   text-align: center;
