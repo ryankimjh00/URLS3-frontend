@@ -56,8 +56,8 @@ export const NavComponent = () => {
                             </Nav.Link>
                         }
                         {!loginStatus &&
-                            <Nav.Link href="/signup">
-                                회원 가입
+                            <Nav.Link href="/login">
+                                로그인
                             </Nav.Link>
                         }
 

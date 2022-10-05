@@ -35,56 +35,63 @@ const Main = () => {
               <Button id="postUrl" type="submit">S3</Button>
             </form>
           </MainDiv>
-            <FirstDiv>
-                    <Link id="slink">copy link</Link>
-                </FirstDiv>
-                <Button onClick={async () => await navigator.clipboard.writeText('copy')}>copy</Button>
-            <Br/>
-                <SecondDiv>
-                    <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
-                        <QR
-                            id="qr-gen"
-                            size={150}
-                            value={url}
-                            includeMargin={false}
-                            fgColor={'black'}
-                            style={{ margin: '15%' }}
-                         />
-                    </SDiv>
-                    <SDiv>
-                        <FacebookShareButton style={{ margin: '15%' }} url={url}>
-                            <FacebookIcon size={150} round={true} borderRadius={24}></FacebookIcon>
-                        </FacebookShareButton>
-                    </SDiv>
-                    <SDiv>
-                        <FacebookMessengerShareButton style={{ margin: '15%' }} url={url} appId={''}>
-                            <FacebookMessengerIcon size={150} round={true} borderRadius={24}></FacebookMessengerIcon>
-                        </FacebookMessengerShareButton>
-                    </SDiv>
-                    <SDiv>
-                        <TwitterShareButton style={{ margin: '15%' }} url={url}>
-                            <TwitterIcon size={150} round={true} borderRadius={24}></TwitterIcon>
-                        </TwitterShareButton>
-                    </SDiv>
-                    <SDiv>
-                        <LineShareButton style={{ margin: '15%' }} url={url}>
-                            <LineIcon size={150} round={true} borderRadius={24}></LineIcon>
-                        </LineShareButton>
-                    </SDiv>
-                </SecondDiv>
-                <ThirdDiv>
-                    <TDiv style={{ marginLeft: '10%' }}>
-                        QR
-                    </TDiv>
-                    <TDiv style={{ marginLeft: '30%' }}>
-                        SNS
-                    </TDiv>
-                </ThirdDiv>
-            <Br/>
-                <FourthDiv>
-                    Technology
-                </FourthDiv>
-            <div style={{ width: '100%', height: '50px' }}></div>
+          <FirstDiv>
+            <Link id="slink">copy link</Link>
+          </FirstDiv>
+          <Button onClick={ async () => {
+            try {
+              await navigator.clipboard.writeText(url);
+              window.alert('카피 완료!');
+            } catch (error) {
+              window.alert('카피 실패 ㅜㅜ');
+            }
+          }}>copy</Button>
+          <Br/>
+          <SecondDiv>
+            <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
+              <QR
+                id="qr-gen"
+                size={150}
+                value={url}
+                includeMargin={false}
+                fgColor={'black'}
+                style={{ margin: '15%' }}
+              />
+            </SDiv>
+            <SDiv>
+              <FacebookShareButton style={{ margin: '15%' }} url={url}>
+                <FacebookIcon size={150} round={true} borderRadius={24}></FacebookIcon>
+              </FacebookShareButton>
+            </SDiv>
+            <SDiv>
+              <FacebookMessengerShareButton style={{ margin: '15%' }} url={url} appId={''}>
+                <FacebookMessengerIcon size={150} round={true} borderRadius={24}></FacebookMessengerIcon>
+              </FacebookMessengerShareButton>
+            </SDiv>
+            <SDiv>
+              <TwitterShareButton style={{ margin: '15%' }} url={url}>
+                <TwitterIcon size={150} round={true} borderRadius={24}></TwitterIcon>
+              </TwitterShareButton>
+            </SDiv>
+            <SDiv>
+              <LineShareButton style={{ margin: '15%' }} url={url}>
+                <LineIcon size={150} round={true} borderRadius={24}></LineIcon>
+              </LineShareButton>
+            </SDiv>
+          </SecondDiv>
+          <ThirdDiv>
+            <TDiv style={{ marginLeft: '10%' }}>
+              QR
+            </TDiv>
+            <TDiv style={{ marginLeft: '30%' }}>
+              SNS
+            </TDiv>
+          </ThirdDiv>
+          <Br/>
+          <FourthDiv>
+            Technology
+          </FourthDiv>
+          <div style={{ width: '100%', height: '50px' }}></div>
         </MainContainer>
   );
 };
@@ -170,7 +177,8 @@ const FourthDiv = styled.div`
   outline: none;
   position: center;
   width:100%;
-  padding-bottom:4%;
+  padding-top:5%;
+  padding-bottom:5%;
 `;
 const TDiv = styled.div`
   font-weight: 400;
