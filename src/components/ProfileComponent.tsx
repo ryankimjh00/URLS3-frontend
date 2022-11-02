@@ -1,5 +1,5 @@
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ImgUpload, onChange } from '../features/ImgUpload';
 import axios from 'axios';
@@ -9,7 +9,6 @@ import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { storeImage } from '../redux/slices/ImageSlice';
-
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
@@ -36,18 +35,6 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       .then(r => { dispatch(storeImage(r.data.image)); })
       .catch(err => console.log(err));
   };
-  const UpdateProfile = async () => {
-    await axios.post(`${backUrl}/profile/`, {}, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
-      }
-    })
-      .then(r => {
-        dispatch(storeThumbnail(' '));
-        console.log('Updated!!');
-      });
-  };
   const ReadProfile = async () => {
     console.log(user.pk);
     if (user.pk !== -1) {
@@ -61,9 +48,19 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
         .catch(err => console.log(err));
     }
   };
-  useCallback(() => {
-    void UpdateProfile();
-  }, []);
+  const UpdateProfile = async () => {
+    await axios.post(`${backUrl}/profile/`, {}, {
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`
+      }
+    })
+      .then(r => {
+        dispatch(storeThumbnail(''));
+        console.log('Updated!!');
+      });
+  };
+
   useEffect(() => {
     void ReadProfile();
     void GetImg();

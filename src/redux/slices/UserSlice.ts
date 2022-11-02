@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserType } from '../../interface/UserType';
 
 // Define a type for the slice state
-
+interface UserType{
+  pk: number
+  username: string
+  email: string
+  first_name: string
+  last_name: string
+}
 const initialState: UserType = {
   pk: -1,
   username: '',
