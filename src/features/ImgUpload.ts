@@ -12,12 +12,12 @@ export const ImgUpload = async () => {
       Authorization: `Bearer ${AccessToken}`,
       'Content-Type': 'multipart/form-data'
     }
-  }).catch((err) => { console.log(err); });
+  }).then(() => { console.log('ImgUpload'); }).catch((err) => { console.log(err); });
 };
 
 export const onChange = (e: any) => {
   const img = e.target.files[0];
 
   formData.append('file', img);
-  console.log(formData);
+  console.log('이미지 등록');
 };
