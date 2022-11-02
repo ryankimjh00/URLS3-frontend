@@ -2,21 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 
-export const ThumbnailSlice = createSlice({
-  name: 'Thumbnail',
+export const FocusedS3Slice = createSlice({
+  name: 'FocusedS3',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState: {
-    url: ' '
+    s3_id: -1
   },
-
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    storeThumbnail: (state, action: PayloadAction<string>) => {
-      state.url = action.payload;
+    storeFocusedS3: (state, action: PayloadAction<number>) => {
+      state.s3_id = action.payload;
     }
   }
 });
 
-export const { storeThumbnail } = ThumbnailSlice.actions;
+export const { storeFocusedS3 } = FocusedS3Slice.actions;
 
-export default ThumbnailSlice.reducer;
+export default FocusedS3Slice.reducer;
