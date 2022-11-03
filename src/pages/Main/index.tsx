@@ -1,41 +1,41 @@
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { backUrl } from '../../variable/url';
-import { AccessToken } from '../../variable/token';
+import {backUrl} from '../../variable/url';
+import {AccessToken} from '../../variable/token';
 
 const Main = () => {
-  const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('');
 
-  const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(e.target.value);
-  }, []);
-  // const s3Handler = async () => {
-  //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
-  // };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    axios.post(`${backUrl}/s3/`, {
-      target_url: url
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    }, {
-      withCredentials: true,
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`,
-        'Content-Type': 'application/json',
-        accept: 'application/json'
-      }
-    })
-      //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      .then(json => alert(JSON.stringify(json)))
-      .catch(() => window.alert('에러'));
-  };
-  return (
+    const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setUrl(e.target.value);
+    }, []);
+    // const s3Handler = async () => {
+    //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
+    // };
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        axios.post(`${backUrl}/s3/`, {
+            target_url: url,
+            short_by_words: true
+        }, {
+            withCredentials: true,
+            headers: {
+                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                Authorization: `Bearer ${AccessToken}`,
+                'Content-Type': 'application/json',
+                accept: 'application/json'
+            }
+        })
+            //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            .then(json => alert(JSON.stringify(json)))
+            .catch(() => window.alert('에러'));
+    };
+    return (
         <MainContainer>
             <MainDiv>
                 <form onSubmit={onSubmit}>
-                    <Input name="url" onChange={urlHandler} placeholder="Shorten your link" />
+                    <Input name="url" onChange={urlHandler} placeholder="Shorten your link"/>
                     <Button id="postUrl" type="submit">S3</Button>
                 </form>
             </MainDiv>
@@ -44,14 +44,14 @@ const Main = () => {
                     <Link className="slink">copy link</Link>
                 </FirstDiv>
                 <Button>copy</Button>
-                <div style={{ width: '100%', height: '50px' }}></div>
+                <div style={{width: '100%', height: '50px'}}></div>
             </ServeDiv>
         </MainContainer>
-  );
+    );
 };
 const MainContainer = styled.div`
   text-align: center;
-  background-color:white;
+  background-color: white;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
@@ -65,8 +65,8 @@ const ServeDiv = styled.div`
   outline: none;
   position: center;
   background-color: white;
-  width:90%;
-  height:500px;
+  width: 90%;
+  height: 500px;
   margin-top: 25px;
   margin-bottom: 25px;
 
@@ -95,9 +95,9 @@ const FirstDiv = styled.div`
   font-weight: 400;
   outline: none;
   position: center;
-  width:40%;
-  height:50px;
-  font-size:20px;
+  width: 40%;
+  height: 50px;
+  font-size: 20px;
   margin-top: 50px;
   margin-bottom: 50px;
 `;
@@ -105,7 +105,7 @@ const Link = styled.div`
   font-weight: 400;
   border-radius: 8px;
   border-color: #1d1d1f;
-  border:0.1rem solid;
+  border: 0.1rem solid;
   outline: none;
   background-color: #fafafa;
 `;
