@@ -1,12 +1,11 @@
-
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import AnalyticsSidebar from '../../components/AnalyticsSidebar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import TestGetCaptureedData from '../../components/TestGetCaptureedData';
 import styled from 'styled-components';
-import axios from "axios";
-import {backUrl} from "../../variable/url";
+import axios from 'axios';
+import { backUrl } from '../../variable/url';
 
 const Analytics = () => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -33,9 +32,9 @@ const userLocation = () => {
   };
   return (
         <div className="App">
-          <Geographies></Geographies>
-          <ComposableMap></ComposableMap>
-          <Geography></Geography>
+          {/* <Geographies></Geographies> */}
+          {/* <ComposableMap></ComposableMap> */}
+          {/* <Geography></Geography> */}
         </div>
   );
 };
