@@ -6,18 +6,20 @@ import {AccessToken} from '../../variable/token';
 
 const Main = () => {
     const [url, setUrl] = useState('');
-
+    const [copyUrl, setCopyUrl] = useState("copy URL")
     const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value);
     }, []);
     // const s3Handler = async () => {
     //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
     // };
+    const [toggle, setToggle] = useState(true);
+    const toggle_state = () => setToggle(!toggle);
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         axios.post(`${backUrl}/s3/`, {
             target_url: url,
-            short_by_words: true
+            short_by_words: toggle,
         }, {
             withCredentials: true,
             headers: {
@@ -28,7 +30,7 @@ const Main = () => {
             }
         })
             //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            .then(json => alert(JSON.stringify(json)))
+            .then(json => setCopyUrl(json.data.s3_url))
             .catch(() => window.alert('에러'));
     };
     return (
@@ -37,11 +39,12 @@ const Main = () => {
                 <form onSubmit={onSubmit}>
                     <Input name="url" onChange={urlHandler} placeholder="Shorten your link"/>
                     <Button id="postUrl" type="submit">S3</Button>
+                    <Button onClick={toggle_state}>{toggle ? "general" : "Two"}</Button>
                 </form>
             </MainDiv>
             <ServeDiv>
                 <FirstDiv>
-                    <Link className="slink">copy link</Link>
+                    <Link className="slink">{copyUrl}</Link>
                 </FirstDiv>
                 <Button>copy</Button>
                 <div style={{width: '100%', height: '50px'}}></div>
