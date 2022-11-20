@@ -7,6 +7,10 @@ import {AccessToken} from '../../variable/token';
 const Main = () => {
     const [url, setUrl] = useState('');
     const [copyUrl, setCopyUrl] = useState("copy URL")
+    const copy = async () => {
+        await navigator.clipboard.writeText(copyUrl);
+        alert('Text copied');
+    }
     const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value);
     }, []);
@@ -46,7 +50,7 @@ const Main = () => {
                 <FirstDiv>
                     <Link className="slink">{copyUrl}</Link>
                 </FirstDiv>
-                <Button>copy</Button>
+                <Button onClick={copy}>copy</Button>
                 <div style={{width: '100%', height: '50px'}}></div>
             </ServeDiv>
         </MainContainer>
