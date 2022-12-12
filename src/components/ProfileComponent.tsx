@@ -5,7 +5,6 @@ import { ImgUpload, onChange } from '../features/ImgUpload';
 import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
-import { storeThumbnail } from '../redux/slices/ThumbnailSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { storeImage } from '../redux/slices/ImageSlice';
@@ -27,7 +26,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const GetImg = async () => {
     // const thumbnail = useAppSelector(state => state.ThumbnailReducer);
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    await axios.get(`${thumbnail}`, {
+    await axios.get(`${backUrl}/profile/image/`, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         Authorization: `Bearer ${AccessToken}`
@@ -37,6 +36,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       .catch(err => console.log(err));
   };
   const UpdateProfile = async () => {
+    void ImgUpload();
     await axios.post(`${backUrl}/profile/`, {}, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -44,28 +44,14 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       }
     })
       .then(r => {
-        dispatch(storeThumbnail(' '));
         console.log('Updated!!');
       });
   };
-  const ReadProfile = async () => {
-    console.log(user.pk);
-    if (user.pk !== -1) {
-      await axios.get(`${backUrl}/profile/${user.pk}/`, {
-        headers: {
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          Authorization: `Bearer ${AccessToken}`
-        }
-      })
-        .then(r => { dispatch(storeThumbnail(r.data.thumbnail)); })
-        .catch(err => console.log(err));
-    }
-  };
+
   useCallback(() => {
     void UpdateProfile();
   }, []);
   useEffect(() => {
-    void ReadProfile();
     void GetImg();
     console.log(image);
   }, [thumbnail]);
@@ -98,11 +84,11 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           </input>
                       </div>
                       <div>
-                          <input type='button' value ='업로드' onClick={() => { void ImgUpload(); }}/>
+                          <input type='button' value ='업로드' onClick={() => { void UpdateProfile(); }}/>
                       </div>
                   </ImageContainer>
                   <img src={image}/>
-                  <input type='button' value ='확인' onClick={() => { void UpdateProfile(); }} />
+
               </BodyContainer>
 
           </DialogBox>
