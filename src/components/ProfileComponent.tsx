@@ -1,13 +1,13 @@
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { ImgUpload, onChange } from '../features/ImgUpload';
 import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { RootState } from '../redux/store';
-import { storeImage } from '../redux/slices/ImageSlice';
+import { useSelector } from 'react-redux';
 
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
@@ -15,26 +15,13 @@ interface Props{
 }
 
 const ProfileComponent = ({ onClickToggleModal }: Props) => {
-  const thumbnail = useSelector((state: RootState) => state.Thumbnail.url);
-  const image = useSelector((state: RootState) => state.Image.id);
   const user = useSelector((state: RootState) => state.User);
-  const dispatch = useDispatch();
+
   // 1. getMyUser로 로그인한 내 정보들 불러옴
   //   2. 위에서 불러온 pk로 ReadProfile() 실행, 썸네일 주소 리덕스에 저장
   //   3. 썸네일 주소로 image 주소(get) 저장
   //   4.UpdateProfile로 프로필 업데이트 후  위에서 불러온 image
-  const GetImg = async () => {
-    // const thumbnail = useAppSelector(state => state.ThumbnailReducer);
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    await axios.get(`${backUrl}/profile/image/`, {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        Authorization: `Bearer ${AccessToken}`
-      }
-    })
-      .then(r => { dispatch(storeImage(r.data.image)); })
-      .catch(err => console.log(err));
-  };
+
   const UpdateProfile = async () => {
     void ImgUpload();
     await axios.post(`${backUrl}/profile/`, {}, {
@@ -51,10 +38,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
   useCallback(() => {
     void UpdateProfile();
   }, []);
-  useEffect(() => {
-    void GetImg();
-    console.log(image);
-  }, [thumbnail]);
+
   const closeModal = () => {
     onClickToggleModal(false);
   };
