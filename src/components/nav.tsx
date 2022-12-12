@@ -37,7 +37,7 @@ export const NavComponent = () => {
                             // <Nav.Link onClick={onClickToggleModal}>
                             //     Profile
                             // </Nav.Link>
-                            <Nav.Link href="/profile">
+                            <Nav.Link href="/profile" onClick={onClickToggleModal}>
                                 Profile
                             </Nav.Link>
                         }
