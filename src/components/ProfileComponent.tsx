@@ -87,7 +87,6 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                           <input type='button' value ='업로드' onClick={() => { void UpdateProfile(); }}/>
                       </div>
                   </ImageContainer>
-                  <img src={image}/>
 
               </BodyContainer>
 
