@@ -13,6 +13,7 @@ import {
   LineShareButton,
   LineIcon
 } from 'react-share';
+import { AccessToken } from '../../variable/token';
 
 const Main = () => {
   const [url, setUrl] = useState('');
@@ -20,13 +21,16 @@ const Main = () => {
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   }, []);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // const s3Handler = async () => {
+  //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
+  // };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.post(`${backUrl}/s3`, {
-      url
-    }).catch(() => window.alert('로그인에러'));
+    await axios.post(`${backUrl}/s3`, {
+      target_url: url
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
   };
-
   return (
         <MainContainer>
           <MainDiv>
@@ -92,6 +96,20 @@ const Main = () => {
             Technology
           </FourthDiv>
           <div style={{ width: '100%', height: '50px' }}></div>
+            <MainDiv>
+                <form onSubmit={onSubmit}>
+                    <Input name="url" onChange={urlHandler} placeholder="Shorten your link" />
+                    <Button id="postUrl" type="submit">S3</Button>
+                </form>
+            </MainDiv>
+            <ServeDiv>
+                <FirstDiv>
+                    <Link className="slink">copy link</Link>
+                </FirstDiv>
+                <Button>copy</Button>
+                <div style={{ width: '100%', height: '50px' }}></div>
+            </ServeDiv>
+
         </MainContainer>
   );
 };
@@ -104,6 +122,17 @@ const MainDiv = styled.div`
   padding-bottom: 25px;
   text-align: center;
   background-color: black;
+`;
+const ServeDiv = styled.div`
+  display: inline-block;
+  font-weight: 400;
+  outline: none;
+  position: center;
+  background-color: white;
+  width:90%;
+  height:500px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 `;
 const Input = styled.input`
   display: inline-block;
@@ -132,8 +161,12 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
+
   margin-top: 4%;
   margin-bottom: 4%;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;
 const Link = styled.div`
   font-weight: 400;
@@ -187,5 +220,14 @@ const TDiv = styled.div`
   float:left;
   width:15%;
   color:grey;
+  background-color: #fafafa;
 `;
+// const Line = styled.div`
+//   border-left:thin solid grey;
+//   height: 200px;
+//   width:1px;
+//   float:left;
+//   margin-left:20px;
+//   margin-right:20px;
+// `;
 export default Main;
