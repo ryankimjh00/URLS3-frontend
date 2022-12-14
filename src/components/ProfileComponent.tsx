@@ -15,11 +15,9 @@ interface Props{
 
 const ProfileComponent = ({ onClickToggleModal }: Props) => {
   const user = useSelector((state: RootState) => state.User);
-
-  // 1. getMyUser로 로그인한 내 정보들 불러옴
-  //   2. 위에서 불러온 pk로 ReadProfile() 실행, 썸네일 주소 리덕스에 저장
-  //   3. 썸네일 주소로 image 주소(get) 저장
-  //   4.UpdateProfile로 프로필 업데이트 후  위에서 불러온 image
+  // 1. getMyUser()로 로그인한 내 정보들과 프로필 이미지 불러옴 (설정한 이미지가 없다면 안나옴)
+  // 2. 이미지를 선택하고 업로드를 누르면 이미지가 서버에 저장(ImgUpload)되고 그 이미지는 내 프로필이미지로 설정됨(UpdateProfile)
+  // 3. 프로필 창을 닫으면 새로 갱신된 이미지가 프로필 옆에 뜸
 
   const UpdateProfile = async () => {
     void ImgUpload();
@@ -70,7 +68,9 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
                       </div>
                       <div>
                           <input type='button' value ='업로드' onClick={() => { void UpdateProfile(); }}/>
+
                       </div>
+
                   </ImageContainer>
 
               </BodyContainer>
