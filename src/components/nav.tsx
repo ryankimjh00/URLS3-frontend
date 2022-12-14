@@ -22,6 +22,7 @@ export const NavComponent = () => {
   if (AccessToken !== undefined) {
     void getMyUser();
   }
+
   return (
         <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
             <Container>
@@ -49,7 +50,7 @@ export const NavComponent = () => {
                         }
                         {loginStatus &&
                             <Nav.Link onClick={onClickToggleModal}>
-                                <img src={image} width="30" height="30"/>프로필
+                                <img src={image} width="30" height="25" style={{ borderRadius: '4px' }}/>  프로필
                             </Nav.Link>
                         }
                         {loginStatus &&

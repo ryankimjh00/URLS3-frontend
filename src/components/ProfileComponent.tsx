@@ -33,6 +33,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       .then(r => {
         console.log('Updated!!');
       });
+    window.alert('프로필 이미지 수정완료');
   };
 
   useCallback(() => {
