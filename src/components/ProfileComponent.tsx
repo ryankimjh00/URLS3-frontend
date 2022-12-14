@@ -8,7 +8,6 @@ import { AccessToken } from '../variable/token';
 
 import { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
-
 interface Props{
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   onClickToggleModal: (v: boolean) => void
@@ -32,7 +31,8 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
     })
       .then(r => {
         console.log('Updated!!');
-      });
+      }).catch(e => console.log(e));
+
     window.alert('프로필 이미지 수정완료');
   };
 
@@ -48,7 +48,7 @@ const ProfileComponent = ({ onClickToggleModal }: Props) => {
       <ModalContainer>
           <DialogBox>
               <Header>
-                  <h1>Profile Update</h1>
+                  <h1>Profile</h1>
 
                   <Close onClick={closeModal}>
                       X

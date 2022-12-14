@@ -16,8 +16,9 @@ export const ImgUpload = async () => {
 };
 
 export const onChange = (e: any) => {
+  formData.delete('file');
   const img = e.target.files[0];
 
   formData.append('file', img);
-  console.log('이미지 등록');
+  console.log(img);
 };
