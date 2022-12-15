@@ -6,7 +6,7 @@ import { AccessToken } from '../../variable/token';
 
 const Main = () => {
   const [url, setUrl] = useState('');
-  const [copyUrl, setCopyUrl] = useState('Shorten URL');
+  const [copyUrl, setCopyUrl] = useState('Make your URL short!');
   const copy = async () => {
     await navigator.clipboard.writeText(copyUrl);
     alert('Text copied');
@@ -50,7 +50,7 @@ const Main = () => {
                 <FirstDiv>
                     <Link className="slink">{copyUrl}</Link>
                 </FirstDiv>&nbsp;
-                <Button onClick={copy}>Ctrl+C</Button>
+                <Button onClick={copy}>Copy</Button>
                 <div style={{ width: '100%', height: '50px' }}></div>
             </ServeDiv>
         </MainContainer>

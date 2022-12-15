@@ -4,6 +4,7 @@ import { LogOut } from '../features/Logout';
 import { AccessToken } from '../variable/token';
 import ProfileComponent from './ProfileComponent';
 import { getMyUser } from '../features/getMyUser';
+
 export const NavComponent = () => {
   const [loginStatus, setloginStatus] = useState(false);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
@@ -37,7 +38,7 @@ export const NavComponent = () => {
                             // <Nav.Link onClick={onClickToggleModal}>
                             //     Profile
                             // </Nav.Link>
-                            <Nav.Link href="/profile" onClick={onClickToggleModal}>
+                            <Nav.Link href="/analytics/profile" onClick={onClickToggleModal}>
                                 Profile
                             </Nav.Link>
                         }
@@ -48,7 +49,7 @@ export const NavComponent = () => {
                         }
                         {!loginStatus &&
                             <Nav.Link href="/signup">
-                                SignIN
+                                Sign In
                             </Nav.Link>
                         }
 
