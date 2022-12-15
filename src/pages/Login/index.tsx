@@ -15,28 +15,23 @@ const LogIn = () => {
     setUsername(e.target.value);
   }, []);
   const login = async () => {
-    await axios.post(`${backUrl}/login/`, {
+    await axios.post(`${backUrl}/token/login/`, {
       username: Username,
       password
 
-    })
+    }, { withCredentials: true })
       .then((res) => {
-        setCookie('LoginToken', res.data);
-        location.replace('/main');
+        setCookie('accessToken', res.data.access);
+        setCookie('refreshToken', res.data.refresh);
       }).catch(() => window.alert('로그인에러'));
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login().then(res => { console.log(res); }).catch(err => { console.log(err); });
+    login().then(res => { location.replace('/'); console.log(res); }).catch(err => { console.log(err); });
   };
   return (
       <Container>
-        <head>
-          <title>로그인 페이지</title>
-        </head>
-
-        <body className="vsc-initialized">
         <div className="wrapper">
           <div className="title">
             <h1>로그인</h1>
@@ -59,11 +54,9 @@ const LogIn = () => {
             <button id="signUpButton" type="submit">로그인</button>
 
           </form>
-
+            <Link to='/signup'>회원가입 하러가기</Link>
         </div>
-        <Link to='/'>회원가입 하러가기</Link>
 
-        </body>
       </Container>
   );
 };
