@@ -1,64 +1,64 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {backUrl} from '../../variable/url';
-import {AccessToken} from '../../variable/token';
+import { backUrl } from '../../variable/url';
+import { AccessToken } from '../../variable/token';
 
 const Main = () => {
-    const [url, setUrl] = useState('');
-    const [copyUrl, setCopyUrl] = useState("copy URL")
-    const [copied, setCopied] = useState(false)
-    const copy = async () => {
-        await navigator.clipboard.writeText(copyUrl);
-        setCopied(true)
-        setTimeout(() => {
-            setCopied(false);
-        }, 1000);
-    }
-    const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setUrl(e.target.value);
-    }, []);
+  const [url, setUrl] = useState('');
+  const [copyUrl, setCopyUrl] = useState('copy URL');
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    await navigator.clipboard.writeText(copyUrl);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+  const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(e.target.value);
+  }, []);
     // const s3Handler = async () => {
     //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
     // };
-    const [toggle, setToggle] = useState(true);
-    const toggle_state = () => setToggle(!toggle);
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        axios.post(`${backUrl}/s3/`, {
-            target_url: url,
-            short_by_words: toggle,
-        }, {
-            withCredentials: true,
-            headers: {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                Authorization: `Bearer ${AccessToken}`,
-                'Content-Type': 'application/json',
-                accept: 'application/json'
-            }
-        })
-            //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            .then(json => setCopyUrl(json.data.s3_url))
-            .catch(() => window.alert('에러'));
-    };
-    return (
-        <MainContainer>
-            <MainDiv>
-                <form onSubmit={onSubmit}>
-                    <Input name="url" onChange={urlHandler} placeholder="Shorten your link"/>
-                    <Button id="postUrl" type="submit">S3</Button>
-                    <Button onClick={toggle_state}>{toggle ? "general" : "Two"}</Button>
-                </form>
-            </MainDiv>
-            <ServeDiv>
-                <FirstDiv>
-                    <Link className="slink">{copyUrl}</Link>
-                </FirstDiv>
-                <Button onClick={copy}>{copied ? "Copied" : "Copy"}</Button>
-                <div style={{width: '100%', height: '50px'}}></div>
-            </ServeDiv>
-        </MainContainer>
-    );
+  const [toggle, setToggle] = useState(true);
+  const toggleState = () => setToggle(!toggle);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    axios.post(`${backUrl}/s3/`, {
+      target_url: url,
+      short_by_words: toggle
+    }, {
+      withCredentials: true,
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`,
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+      //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      .then(json => setCopyUrl(json.data.s3_url))
+      .catch(() => window.alert('에러'));
+  };
+  return (
+    <MainContainer>
+      <MainDiv>
+        <form onSubmit={onSubmit}>
+          <Input name="url" onChange={urlHandler} placeholder="Shorten your link"/>
+          <Button id="postUrl" type="submit">S3</Button>
+          <Button onClick={toggleState}>{toggle ? 'general' : 'Two'}</Button>
+        </form>
+      </MainDiv>
+      <ServeDiv>
+        <FirstDiv>
+          <Link className="slink">{copyUrl}</Link>
+        </FirstDiv>
+        <Button onClick={copy}>{copied ? 'Copied' : 'Copy'}</Button>
+        <div style={ { width: '100%', height: '50px' } }></div>
+      </ServeDiv>
+    </MainContainer>
+  );
 };
 const MainContainer = styled.div`
   text-align: center;
