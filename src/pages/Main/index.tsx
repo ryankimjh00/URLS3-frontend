@@ -147,7 +147,6 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
-
   margin-top: 4%;
   margin-bottom: 4%;
 
@@ -157,7 +156,7 @@ const FirstDiv = styled.div`
 const Link = styled.div`
   font-weight: 400;
   border:grey 0.1rem solid;
-  opacity:0.7;
+  
   outline: none;
   width:95%;
   margin:10px;
