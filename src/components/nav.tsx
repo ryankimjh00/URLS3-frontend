@@ -5,10 +5,12 @@ import { LogOut } from '../features/Logout';
 import { AccessToken } from '../variable/token';
 import ProfileComponent from './ProfileComponent';
 import { getMyUser } from '../features/getMyUser';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 export const NavComponent = () => {
   const [loginStatus, setloginStatus] = useState(false);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-
+  const image = useSelector((state: RootState) => state.Image.id);
   const onClickToggleModal = useCallback(() => {
     setOpenModal(!isOpenModal);
   }, [isOpenModal]);
@@ -21,6 +23,7 @@ export const NavComponent = () => {
   if (AccessToken !== undefined) {
     void getMyUser();
   }
+
   return (
         <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
             <Container>
@@ -48,7 +51,7 @@ export const NavComponent = () => {
                         }
                         {loginStatus &&
                             <Nav.Link onClick={onClickToggleModal}>
-                                프로필
+                                {(Boolean(image !== '-1')) && <img src={image} width="30" height="25" style={{ borderRadius: '4px' }}/> }  프로필
                             </Nav.Link>
                         }
                         {loginStatus &&
