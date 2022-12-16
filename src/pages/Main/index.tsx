@@ -17,21 +17,58 @@ import { AccessToken } from '../../variable/token';
 
 const Main = () => {
   const [url, setUrl] = useState('');
-
+  const [copyUrl, setCopyUrl] = useState('copy URL');
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    await navigator.clipboard.writeText(copyUrl);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   }, []);
-  // const s3Handler = async () => {
-  //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
-  // };
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // const s3Handler = async () => {
+    //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
+    // };
+  const [toggle, setToggle] = useState(true);
+  const toggleState = () => setToggle(!toggle);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post(`${backUrl}/s3`, {
-      target_url: url
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
+    axios.post(`${backUrl}/s3/`, {
+      target_url: url,
+      short_by_words: toggle
+    }, {
+      withCredentials: true,
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`,
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+      //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      .then(json => setCopyUrl(json.data.s3_url))
+      .catch(() => window.alert('에러'));
   };
   return (
+    <MainContainer>
+      <MainDiv>
+        <form onSubmit={onSubmit}>
+          <Input name="url" onChange={urlHandler} placeholder="Shorten your link"/>
+          <Button id="postUrl" type="submit">S3</Button>
+          <Button onClick={toggleState}>{toggle ? 'general' : 'Two'}</Button>
+        </form>
+      </MainDiv>
+      <ServeDiv>
+        <FirstDiv>
+          <Link className="slink">{copyUrl}</Link>
+        </FirstDiv>
+        <Button onClick={copy}>{copied ? 'Copied' : 'Copy'}</Button>
+        <div style={ { width: '100%', height: '50px' } }></div>
+      </ServeDiv>
+    </MainContainer>
         <MainContainer>
           <MainDiv>
             <form onSubmit={onSubmit}>
@@ -115,7 +152,7 @@ const Main = () => {
 };
 const MainContainer = styled.div`
   text-align: center;
-  background-color:white;
+  background-color: white;
 `;
 const MainDiv = styled.div`
   padding-top: 25px;
@@ -129,8 +166,8 @@ const ServeDiv = styled.div`
   outline: none;
   position: center;
   background-color: white;
-  width:90%;
-  height:500px;
+  width: 90%;
+  height: 500px;
   margin-top: 25px;
   margin-bottom: 25px;
 `;
@@ -158,18 +195,24 @@ const FirstDiv = styled.div`
   font-weight: 400;
   outline: none;
   position: center;
+  width: 40%;
+  height: 50px;
+  font-size: 20px;
   width:40%;
   height:50px;
   font-size:20px;
 
-  margin-top: 4%;
-  margin-bottom: 4%;
+//  margin-top: 4%;
+//  margin-bottom: 4%;
 
   margin-top: 50px;
   margin-bottom: 50px;
 `;
 const Link = styled.div`
   font-weight: 400;
+  border-radius: 8px;
+  border-color: #1d1d1f;
+  border: 0.1rem solid;
   border:grey 0.1rem solid;
   opacity:0.7;
   outline: none;
