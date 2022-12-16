@@ -22,9 +22,7 @@ const Main = () => {
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   }, []);
-  // const s3Handler = async () => {
-  //   await axios.get(`${backUrl}/s3`).then(res => console.log(res));
-  // };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios.post(`${backUrl}/s3`, {
@@ -96,6 +94,8 @@ const Main = () => {
           <FourthDiv>
             Technology
           </FourthDiv>
+          <div style={{ width: '100%', height: '50px' }}></div>
+
         </MainContainer>
   );
 };
@@ -109,17 +109,17 @@ const MainDiv = styled.div`
   text-align: center;
   background-color: black;
 `;
-const ServeDiv = styled.div`
-  display: inline-block;
-  font-weight: 400;
-  outline: none;
-  position: center;
-  background-color: white;
-  width:90%;
-  height:500px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-`;
+// const ServeDiv = styled.div`
+//   display: inline-block;
+//   font-weight: 400;
+//   outline: none;
+//   position: center;
+//   background-color: white;
+//   width:90%;
+//   height:500px;
+//   margin-top: 25px;
+//   margin-bottom: 25px;
+// `;
 const Input = styled.input`
   display: inline-block;
   font-weight: 400;
@@ -147,15 +147,16 @@ const FirstDiv = styled.div`
   width:40%;
   height:50px;
   font-size:20px;
-
   margin-top: 4%;
   margin-bottom: 4%;
 
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;
 const Link = styled.div`
   font-weight: 400;
   border:grey 0.1rem solid;
-  opacity:0.7;
+  
   outline: none;
   width:95%;
   margin:10px;
@@ -206,5 +207,12 @@ const TDiv = styled.div`
   color:grey;
   background-color: #fafafa;
 `;
-
+// const Line = styled.div`
+//   border-left:thin solid grey;
+//   height: 200px;
+//   width:1px;
+//   float:left;
+//   margin-left:20px;
+//   margin-right:20px;
+// `;
 export default Main;
