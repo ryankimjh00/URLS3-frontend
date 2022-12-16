@@ -23,13 +23,12 @@ const LogIn = () => {
       .then((res) => {
         setCookie('accessToken', res.data.access);
         setCookie('refreshToken', res.data.refresh);
-        location.replace('/');
       }).catch(() => window.alert('로그인에러'));
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login().then(res => { console.log(res); }).catch(err => { console.log(err); });
+    login().then(res => { location.replace('/'); console.log(res); }).catch(err => { console.log(err); });
   };
   return (
       <Container>

@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import { backUrl } from '../variable/url';
 import { AccessToken } from '../variable/token';
@@ -22,3 +23,4 @@ export const onChange = (e: any) => {
   formData.append('file', img);
   console.log(img);
 };
+
