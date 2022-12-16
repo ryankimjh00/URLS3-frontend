@@ -27,4 +27,3 @@ export const getMyUser = async () => {
     .then(r => { dispatch(storeImage(r.data.image)); })
     .catch(err => console.log(err));
 };
-
