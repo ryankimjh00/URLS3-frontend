@@ -23,4 +23,3 @@ export const onChange = (e: any) => {
   formData.append('file', img);
   console.log(img);
 };
-
