@@ -56,12 +56,12 @@ export const NavComponent = () => {
                         }
                         {loginStatus &&
                             <Nav.Link onClick={LogOut}>
-                                로그 아웃
+                                LogOut
                             </Nav.Link>
                         }
                         {!loginStatus &&
                             <Nav.Link href="/login">
-                                로그인
+                                Sign In
                             </Nav.Link>
                         }
 
