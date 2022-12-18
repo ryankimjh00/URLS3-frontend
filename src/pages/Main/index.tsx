@@ -18,30 +18,48 @@ import { AccessToken } from '../../variable/token';
 
 const Main = () => {
   const [url, setUrl] = useState('');
-
+  const [copyUrl, setCopyUrl] = useState('Make your URL short!');
+  const copy = async () => {
+    await navigator.clipboard.writeText(copyUrl);
+    alert('Text copied');
+  };
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
   }, []);
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const [toggle, setToggle] = useState(true);
+  const toggleState = () => setToggle(!toggle);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await axios.post(`${backUrl}/s3`, {
-      target_url: url
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    }, { withCredentials: true, headers: { Authorization: `Bearer ${AccessToken}` } }).then(res => window.alert(res)).catch(() => window.alert('에러'));
+    axios.post(`${backUrl}/s3/`, {
+      target_url: url,
+      short_by_words: toggle
+    }, {
+      withCredentials: true,
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`,
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+    //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      .then(json => setCopyUrl(json.data.s3_url))
+      .catch(() => window.alert('에러'));
   };
   return (
         <MainContainer>
           <MainDiv>
             <form onSubmit={onSubmit}>
-              <Input name="url" onChange={urlHandler} placeholder="Shorten your link" />
-              <Button id="postUrl" type="submit">S3</Button>
+              <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />
+              <Button id="postUrl" type="submit">Make URL</Button>&nbsp;
+              <Button onClick={toggleState}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
             </form>
           </MainDiv>
           <FirstDiv>
-            <Link id="slink">copy link</Link>
+            <Link className="slink">{copyUrl}</Link>
           </FirstDiv>
-          <Button onClick={ async () => {
+          <Button onClick={copy}>Copy</Button>
+          <Button onClick= { async () => {
             try {
               await navigator.clipboard.writeText(url);
               window.alert('카피 완료!');
@@ -137,7 +155,8 @@ const Button = styled.button`
   font-size: 20px;
   background-color: inherit;
   color: #2997ff;
-  border: 0;
+  border: 2px solid #2997ff;
+  border-radius: 10px;
 `;
 const FirstDiv = styled.div`
   display: inline-block;
@@ -149,14 +168,11 @@ const FirstDiv = styled.div`
   font-size:20px;
   margin-top: 4%;
   margin-bottom: 4%;
-
-  margin-top: 50px;
-  margin-bottom: 50px;
 `;
 const Link = styled.div`
   font-weight: 400;
-  border:grey 0.1rem solid;
-  
+  border:#1d1d1f 0.1rem solid;
+  border-radius: 8px;
   outline: none;
   width:95%;
   margin:10px;
