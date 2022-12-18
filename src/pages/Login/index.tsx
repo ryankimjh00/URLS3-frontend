@@ -129,10 +129,11 @@ const Icon = styled.div`
 `;
 const Input = styled.input`
   width: 80%;
-  border: none; // 검색창 border 을 없앰으로써 자연스러워짐
-  -webkit-appearance: none; // 기본 search 디자인을 없앰
+  height: 100%;
+  border: none; 
+  -webkit-appearance: none; 
   margin-left: 5%;
-  overflow: auto; //검색어가 길어졌을때 오른쪽으로 자연스럽게 검색되도록 하기 위해
+  overflow: auto; 
   z-index: -1;
   font-size: 20px;
 `;
