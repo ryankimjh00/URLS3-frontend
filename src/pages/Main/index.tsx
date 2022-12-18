@@ -51,12 +51,12 @@ const Main = () => {
           <MainDiv>
             <form onSubmit={onSubmit}>
               <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />
-              <Button id="postUrl" type="submit">Make URL</Button>
+              <Button id="postUrl" type="submit">Make URL</Button>&nbsp;
               <Button onClick={toggleState}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
             </form>
           </MainDiv>
           <FirstDiv>
-            <Link className="slink">copy link</Link>
+            <Link className="slink">{copyUrl}</Link>
           </FirstDiv>
           <Button onClick={copy}>Copy</Button>
           <Button onClick= { async () => {
