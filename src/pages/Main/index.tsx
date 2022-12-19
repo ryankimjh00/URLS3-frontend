@@ -57,16 +57,17 @@ const Main = () => {
           </MainDiv>
           <FirstDiv>
             <Link className="slink">{copyUrl}</Link>
+            <Button onClick={copy}>Copy</Button>
+            { /* <Button onClick= { async () => { */ }
+            { /*  try { */ }
+            { /*    await navigator.clipboard.writeText(url); */ }
+            { /*    window.alert('카피 완료!'); */ }
+            { /*  } catch (error) { */ }
+            { /*    window.alert('카피 실패 ㅜㅜ'); */ }
+            { /*  } */ }
+            { /* }}>copy</Button> */ }
+
           </FirstDiv>
-          <Button onClick={copy}>Copy</Button>
-          <Button onClick= { async () => {
-            try {
-              await navigator.clipboard.writeText(url);
-              window.alert('카피 완료!');
-            } catch (error) {
-              window.alert('카피 실패 ㅜㅜ');
-            }
-          }}>copy</Button>
           <Br/>
           <SecondDiv>
             <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
@@ -150,20 +151,19 @@ const Input = styled.input`
   outline: none;
 `;
 const Button = styled.button`
-  display: inline-block;
   box-sizing: content-box;
   font-size: 20px;
   background-color: inherit;
   color: #2997ff;
   border: 2px solid #2997ff;
   border-radius: 10px;
+  
 `;
 const FirstDiv = styled.div`
-  display: inline-block;
+  display: inline-flex;
   font-weight: 400;
   outline: none;
-  position: center;
-  width:40%;
+  //width:40%;
   height:50px;
   font-size:20px;
   margin-top: 4%;
@@ -174,7 +174,9 @@ const Link = styled.div`
   border:#1d1d1f 0.1rem solid;
   border-radius: 8px;
   outline: none;
-  width:95%;
+  //width: auto;
+  min-width: 500px;
+  height: auto;
   margin:10px;
 `;
 const SecondDiv = styled.div`
