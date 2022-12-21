@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { backUrl } from '../../variable/url';
 import QR from 'qrcode.react';
-// import Button from '@mui/material/Button';
-import Button from '../../components/CustomButtonComponent';
+import Button from '@mui/material/Button';
 // 버튼 쓸때 여기 참고 https://mui.com/material-ui/react-button/#outlined-buttons
+// import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -18,7 +19,6 @@ import {
   LineIcon
 } from 'react-share';
 import { AccessToken } from '../../variable/token';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const Main = () => {
   const [url, setUrl] = useState('');
@@ -60,16 +60,14 @@ const Main = () => {
           <MainDiv>
             <form onSubmit={onSubmit}>
               <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />&nbsp;
-              {/* <Button id="postUrl" type="submit" variant={'contained'} color={'success'} >Make URL</Button>&nbsp; */}
-              <Button id={'postUrl'} type={'submit'} onClick={() => console.log('makeUrl')} display={'inline-block'}
-                      boxSizing={'content-box'} border={'1px solid black'} radius={'10px'} color={'blue'} height={'5px'} width={'20px'} font={'20px'}></Button>
-              {/* <Button onClick={toggleState} variant={'contained'} color={'success'}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button> */}
+              <Button id="postUrl" type="submit" variant={'contained'} color={'success'} >Make URL</Button>&nbsp;
+              <Button onClick={toggleState} variant={'contained'} color={'success'}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
             </form>
           </MainDiv>
           <FirstDiv>
             <Link className="slink">{copyUrl}</Link>
           </FirstDiv>
-          {/* <Button onClick={copy} variant={'contained'} color={'success'} endIcon={''}>Copy</Button> */}
+          <Button onClick={copy} variant={'contained'} color={'success'} endIcon={''}>Copy</Button>
           <Br/>
           <SecondDiv>
             <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
