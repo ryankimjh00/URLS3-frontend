@@ -1,7 +1,7 @@
 
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { backUrl } from '../../variable/url';
 import QR from 'qrcode.react';
 import {
@@ -21,6 +21,9 @@ const Main = () => {
   const [copyUrl, setCopyUrl] = useState('Make your URL short!');
   const copy = async () => {
     await navigator.clipboard.writeText(copyUrl);
+    // axios.post(`${backUrl}/collect/`, {
+    //   id: id,
+    // })
     alert('Text copied');
   };
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +31,34 @@ const Main = () => {
   }, []);
   const [toggle, setToggle] = useState(true);
   const toggleState = () => setToggle(!toggle);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const nounPatchSubmit = (res: AxiosResponse<any, any>) => {
+    const hashedValue = res.data.s3_url.split('/');
+    const params: string = hashedValue[hashedValue.length - 1];
+    axios.patch(`${backUrl}/${params}`, {
+      target_url: res.data.target_url,
+      short_by_words: toggle
+    }).then().catch(() => window.alert('에러'));
+  };
+
+  const nounSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    axios.post(`${backUrl}/s3/`, {
+      target_url: url,
+      short_by_words: !toggle
+    }, {
+      withCredentials: true,
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        Authorization: `Bearer ${AccessToken}`,
+        'Content-Type': 'application/json',
+        accept: 'application/json'
+      }
+    })
+      //  call patch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      .then(res => nounPatchSubmit(res))
+      .catch(() => window.alert('에러'));
+  };
+  const hashSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios.post(`${backUrl}/s3/`, {
       target_url: url,
@@ -43,13 +73,18 @@ const Main = () => {
       }
     })
     //  data.s3_url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      .then(json => setCopyUrl(json.data.s3_url))
+      .then(json => {
+        setCopyUrl(json.data.s3_url);
+        if (toggle) {
+          nounSubmit(e);
+        }
+      })
       .catch(() => window.alert('에러'));
   };
   return (
         <MainContainer>
           <MainDiv>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={hashSubmit}>
               <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />
               <Button id="postUrl" type="submit">Make URL</Button>&nbsp;
               <Button onClick={toggleState}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
