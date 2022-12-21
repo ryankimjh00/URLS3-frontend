@@ -19,9 +19,13 @@ import { AccessToken } from '../../variable/token';
 const Main = () => {
   const [url, setUrl] = useState('');
   const [copyUrl, setCopyUrl] = useState('Make your URL short!');
+  const [copied, setCopied] = useState(false);
   const copy = async () => {
     await navigator.clipboard.writeText(copyUrl);
-    alert('Text copied');
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
   };
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
@@ -58,15 +62,7 @@ const Main = () => {
           <FirstDiv>
             <Link className="slink">{copyUrl}</Link>
           </FirstDiv>
-          <Button onClick={copy}>Copy</Button>
-          <Button onClick= { async () => {
-            try {
-              await navigator.clipboard.writeText(url);
-              window.alert('카피 완료!');
-            } catch (error) {
-              window.alert('카피 실패 ㅜㅜ');
-            }
-          }}>copy</Button>
+          {copied ? <Bts>copied!</Bts> : <Button onClick={copy}>copy</Button>}
           <Br/>
           <SecondDiv>
             <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
@@ -155,6 +151,15 @@ const Button = styled.button`
   font-size: 20px;
   background-color: inherit;
   color: #2997ff;
+  border: 2px solid #2997ff;
+  border-radius: 10px;
+`;
+const Bts = styled.button`
+  display: inline-block;
+  box-sizing: content-box;
+  font-size: 20px;
+  background-color: green;
+  color: whitesmoke;
   border: 2px solid #2997ff;
   border-radius: 10px;
 `;
