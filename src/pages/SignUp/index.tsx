@@ -4,6 +4,8 @@ import { backUrl } from '../../variable/url';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AccessToken } from '../../variable/token';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faLock } from '@fortawesome/free-solid-svg-icons';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -53,41 +55,56 @@ const SignUp = () => {
   }, []);
   return (
             <Container>
-                <div className="wrapper">
-                    <div className="title">
-                        <h1>회원가입</h1>
-                    </div>
-                    <form onSubmit={onSubmit}>
-                        <div className="email">
-                            <input id="email" type="email" value={email} onChange={onChangeEmail} placeholder="이메일을 입력해 주세요."/>
-                            <div id="emailError" className="error"></div>
-                        </div>
-                        <div className="Username">
-                            <input id="Username" type="text" value={Username} onChange={onChangeUsername} placeholder="이름을 입력해 주세요."/>
-                            <div id="nameError" className="error"></div>
-                        </div>
-                        <div className="password">
-                            <input id="password" type="password" value={password} onChange={onChangePassword} placeholder="비밀번호를 입력해 주세요."/>
-                            <div id="passwordError" className="error"></div>
-                        </div>
-                        <div className="passwordCheck">
-                            <input id="passwordCheck" type="password" value={passwordCheck} onChange={onChangePasswordCheck} placeholder="비밀번호를 다시 입력해 주세요."/>
-                            <div id="passwordCheckError" className="error"></div>
-                        </div>
+                <Wrap className="wrapper">
+                    <Title className="title">
+                        <h1>Sign up</h1>
+                    </Title>
+                    <Form onSubmit={onSubmit}>
+                        <InputDiv className="email">
+                            <IconInput>
+                                <Input id="email" type="email" value={email} onChange={onChangeEmail} placeholder="E-mail"/>
+                                <div id="emailError" className="error"></div>
+                            </IconInput>
+                        </InputDiv>
+                        <InputDiv className="Username">
+                            <IconInput>
+                                <Input id="Username" type="text" value={Username} onChange={onChangeUsername} placeholder="Name"/>
+                                <div id="nameError" className="error"></div>
+                            </IconInput>
+                        </InputDiv>
+                        <InputDiv className="password">
+                            <IconInput>
+                                <Input id="password" type="password" value={password} onChange={onChangePassword} placeholder="Password"/>
+                                <Icon>
 
-                        <div className="line">
+                                    <FontAwesomeIcon icon={faLock} />
+                                </Icon>
+                                <div id="passwordError" className="error"></div>
+                            </IconInput>
+                        </InputDiv>
+                        <InputDiv className="passwordCheck">
+                            <IconInput>
+                                <Input id="passwordCheck" type="password" value={passwordCheck} onChange={onChangePasswordCheck} placeholder="Check Password"/>
+                                <Icon>
+                                    <FontAwesomeIcon icon={faCheck} />
+                                </Icon>
+                                <div id="passwordCheckError" className="error"></div>
+                            </IconInput>
+                        </InputDiv>
+
+                        <Line className="line">
                             <hr/>
                             <h5>{SignUpErr}</h5>
-                        </div>
+                        </Line>
                         {mismatchError &&
                             <h1>{mismatchErrorText}</h1>
                         }
 
-                        <button id="signUpButton" type="submit">가입하기</button>
+                        <Button id="signUpButton" type="submit">Sign up</Button>
 
-                    </form>
-                        <Link to="/login">로그인 하러 가기</Link>
-                </div>
+                    </Form>
+                        <StyledLink to="/login">Sign in</StyledLink>
+                </Wrap>
 
             </Container>
   );
@@ -98,6 +115,72 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+`;
+
+const Title = styled.div`
+  margin-bottom: 5vh;
+`;
+
+const Wrap = styled.div`
+  height: 80vh;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align : center;
+  border-radius: 5px; 
+`;
+
+const Form = styled.form`
+  witdh: 100%;
+  height: 100%;
+`;
+
+const Line = styled.div`
+  padding: 0 10% 0 10%;
+`;
+
+const Button = styled.button`
+  width: 80%;
+  border-radius: 5px;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  font-size: 15px;
+  height: auto;
+`;
+const InputDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 10%;
+`;
+
+const IconInput = styled.div`
+  display: flex;
+  align-items: center;
+  width: 80%;
+  border-radius: 5px;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  opacity: 1;
+`;
+const Icon = styled.div`
+  margin-left: 5%;
+`;
+const Input = styled.input`
+  width: 80%;
+  height: 100%;
+  border: none; 
+  -webkit-appearance: none; 
+  margin-left: 5%;
+  overflow: auto; 
+  z-index: -1;
+  font-size: 15px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
 `;
 
 export default SignUp;

@@ -48,6 +48,7 @@ const LogIn = () => {
               </IconInput>
               <div id="nameError" className="error"></div>
             </InputDiv>
+
             <InputDiv className="password">
               <IconInput>
                 <Icon>
