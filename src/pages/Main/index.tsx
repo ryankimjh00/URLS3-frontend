@@ -99,15 +99,7 @@ const Main = () => {
           </MainDiv>
           <FirstDiv>
             <Link className="slink">{copyUrl}</Link>
-            <Button onClick={copy}>Copy</Button>
-            { /* <Button onClick= { async () => { */ }
-            { /*  try { */ }
-            { /*    await navigator.clipboard.writeText(url); */ }
-            { /*    window.alert('카피 완료!'); */ }
-            { /*  } catch (error) { */ }
-            { /*    window.alert('카피 실패 ㅜㅜ'); */ }
-            { /*  } */ }
-            { /* }}>copy</Button> */ }
+
 
           </FirstDiv>
           {copied ? <Bts>copied!</Bts> : <Button onClick={copy} variant={'contained'} color={'success'}>copy</Button>}
