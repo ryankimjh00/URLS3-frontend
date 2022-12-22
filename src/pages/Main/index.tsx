@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import axios, { AxiosResponse } from 'axios';
 import { backUrl } from '../../variable/url';
 import QR from 'qrcode.react';
+import Button from '@mui/material/Button';
+// 버튼 쓸때 여기 참고 https://mui.com/material-ui/react-button/#outlined-buttons
+// import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -19,12 +23,15 @@ import { AccessToken } from '../../variable/token';
 const Main = () => {
   const [url, setUrl] = useState('');
   const [copyUrl, setCopyUrl] = useState('Make your URL short!');
+  const [copied, setCopied] = useState(false);
   const copy = async () => {
     await navigator.clipboard.writeText(copyUrl);
-    // axios.post(`${backUrl}/collect/`, {
-    //   id: id,
-    // })
     alert('Text copied');
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+
   };
   const urlHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value);
@@ -85,9 +92,9 @@ const Main = () => {
         <MainContainer>
           <MainDiv>
             <form onSubmit={hashSubmit}>
-              <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />
-              <Button id="postUrl" type="submit">Make URL</Button>&nbsp;
-              <Button onClick={toggleState}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
+              <Input name="url" onChange={urlHandler} placeholder="paste here to make your URL short" />&nbsp;
+              <Button id="postUrl" type="submit" variant={'contained'} color={'success'} >Make URL</Button>&nbsp;
+              <Button onClick={toggleState} variant={'contained'} color={'success'}>{toggle ? 'random_encoding' : 'noun-adj_combination'}</Button>
             </form>
           </MainDiv>
           <FirstDiv>
@@ -103,6 +110,8 @@ const Main = () => {
             { /* }}>copy</Button> */ }
 
           </FirstDiv>
+          {copied ? <Bts>copied!</Bts> : <Button onClick={copy} variant={'contained'} color={'success'}>copy</Button>}
+
           <Br/>
           <SecondDiv>
             <SDiv style={{ marginLeft: '10%', marginRight: '5%' }}>
@@ -174,6 +183,17 @@ const MainDiv = styled.div`
 //   margin-top: 25px;
 //   margin-bottom: 25px;
 // `;
+
+/* const Button = styled.button`
+  display: inline-block;
+  box-sizing: content-box;
+  font-size: 20px;
+  background-color: inherit;
+  color: #2997ff;
+  border: 2px solid #2997ff;
+  border-radius: 10px;
+`; */
+
 const Input = styled.input`
   display: inline-block;
   font-weight: 400;
@@ -185,11 +205,12 @@ const Input = styled.input`
   color: white;
   outline: none;
 `;
-const Button = styled.button`
+const Bts = styled.button`
+  display: inline-block;
   box-sizing: content-box;
   font-size: 20px;
-  background-color: inherit;
-  color: #2997ff;
+  background-color: green;
+  color: whitesmoke;
   border: 2px solid #2997ff;
   border-radius: 10px;
   

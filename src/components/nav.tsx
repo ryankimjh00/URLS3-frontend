@@ -27,12 +27,10 @@ export const NavComponent = () => {
   return (
         <Navbar collapseOnSelect expand="lg" bg="black" style={ { zIndex: 10 } } variant="dark">
             <Container>
-                <Navbar.Brand href="/">ULS3</Navbar.Brand>
+                <Navbar.Brand href="/">URLS3</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/features">Features</Nav.Link>
-                        <Nav.Link href="/pricing">Pricing</Nav.Link>
                         <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="/action/3.2">
@@ -47,11 +45,11 @@ export const NavComponent = () => {
                     </Nav>
                     <Nav>
                         {loginStatus &&
-                            <Nav.Link href="/analytics">Analytics S3</Nav.Link>
+                            <Nav.Link href="/analytics">Analytics</Nav.Link>
                         }
                         {loginStatus &&
                             <Nav.Link onClick={onClickToggleModal}>
-                                {(Boolean(image !== '-1')) && <img src={image} width="30" height="25" style={{ borderRadius: '4px' }}/> }  프로필
+                                {(Boolean(image !== '-1')) && <img src={image} width="30" height="25" style={{ borderRadius: '4px' }} alt={'profile'}/> }  profile
                             </Nav.Link>
                         }
                         {loginStatus &&
